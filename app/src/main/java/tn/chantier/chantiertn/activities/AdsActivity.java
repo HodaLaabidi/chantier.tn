@@ -1,6 +1,8 @@
 package tn.chantier.chantiertn.activities;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -30,15 +32,15 @@ public class AdsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ads);
         ButterKnife.bind(this);
-        webView.loadUrl("http://www.comaf.tn/");
+        Intent intent = new Intent(Intent.ACTION_VIEW , Uri.parse("http://www.comaf.tn/"));
+        startActivity(intent);
+        finish();
     }
 
     @Override
     public void onBackPressed() {
-        if (webView.canGoBack()) {
-            webView.goBack();
-        } else {
+
             super.onBackPressed();
-        }
+
     }
 }

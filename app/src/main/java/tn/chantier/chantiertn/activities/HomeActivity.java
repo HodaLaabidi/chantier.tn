@@ -27,6 +27,7 @@ import android.widget.FrameLayout;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.gson.JsonObject;
 
@@ -136,7 +137,7 @@ public class HomeActivity extends AppCompatActivity
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                       if ( task.isSuccessful()){
+                       if ( ! task.isSuccessful()){
                            Log.e("subscribe to topic" , "subscribe failed"+"");
                        } else {
                            Log.e("subscribe to topic" , "subscribe successed");
