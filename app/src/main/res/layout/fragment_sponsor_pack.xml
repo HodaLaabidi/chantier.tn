@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="350dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_gravity="center_horizontal"
+    android:layout_height="500dp"
+    android:layout_marginTop="20dp"
+    tools:context=".fragments.SponsorPackFragment">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:background="@color/colorYellow"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+            <tn.chantier.chantiertn.utils.textstyle.RalewayTextView
+                android:textColor="@color/colorWhite"
+                android:textAllCaps="true"
+                android:background="@drawable/background_pack_type"
+                android:padding="10dp"
+                android:gravity="center_horizontal"
+                app:fonttype="bold"
+                android:textSize="20sp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/sponsor_pack"/>
+
+        </LinearLayout>
+        <tn.chantier.chantiertn.utils.textstyle.RalewayTextView
+            android:layout_width="match_parent"
+            android:padding="10dp"
+            android:gravity="center_horizontal"
+            android:text="@string/leads"
+            android:textColor="@color/colorGrey"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:background="@color/colorGrey"
+            android:layout_height="1dp"/>
+        <tn.chantier.chantiertn.utils.textstyle.RalewayTextView
+            android:layout_width="match_parent"
+            android:padding="10dp"
+            android:gravity="center_horizontal"
+            android:text="@string/administration"
+            android:textColor="@color/colorGrey"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:background="@color/colorGrey"
+            android:layout_height="1dp"/>
+        <tn.chantier.chantiertn.utils.textstyle.RalewayTextView
+            android:layout_width="match_parent"
+            android:padding="10dp"
+            android:gravity="center_horizontal"
+            android:text="@string/assistance"
+            android:textColor="@color/colorGrey"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:background="@color/colorGrey"
+            android:layout_height="1dp"/>
+        <tn.chantier.chantiertn.utils.textstyle.RalewayTextView
+            android:layout_width="match_parent"
+            android:padding="10dp"
+            android:gravity="center_horizontal"
+            android:text="@string/bilan"
+            android:textColor="@color/colorGrey"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:background="@color/colorGrey"
+            android:layout_height="1dp"/>
+        <tn.chantier.chantiertn.utils.textstyle.RalewayTextView
+            android:layout_width="match_parent"
+            android:padding="10dp"
+            android:gravity="center_horizontal"
+            android:text="@string/bannier"
+            android:textColor="@color/colorGrey"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:background="@color/colorGrey"
+            android:layout_height="1dp"/>
+        <tn.chantier.chantiertn.utils.textstyle.RalewayTextView
+            android:layout_width="match_parent"
+            android:padding="10dp"
+            android:gravity="center_horizontal"
+            android:text="@string/sponsor"
+            android:textColor="@color/colorGrey"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:background="@color/colorGrey"
+            android:layout_height="1dp"/>
+        <tn.chantier.chantiertn.utils.textstyle.RalewayTextView
+            android:layout_width="match_parent"
+            android:padding="10dp"
+            android:gravity="center_horizontal"
+            android:text="@string/habillage"
+            android:textColor="@color/colorGrey"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:background="@color/colorGrey"
+            android:layout_height="1dp"/>
+        <tn.chantier.chantiertn.utils.textstyle.RalewayTextView
+            android:textSize="18dp"
+            app:fonttype="bold"
+            android:layout_width="match_parent"
+            android:padding="10dp"
+            android:gravity="center_horizontal"
+            android:text="@string/Sponsor_pack_price"
+            android:textColor="@color/colorGrey"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:background="@color/colorGrey"
+            android:layout_height="1dp"/>
+
+        <Button
+            android:id="@+id/button_sponsor_pack"
+            android:layout_gravity="center_horizontal"
+            android:textColor="@color/colorBlack"
+            android:text="@string/subscribe_button"
+            android:background="@color/colorYellow"
+            android:layout_marginTop="30dp"
+            android:paddingRight="30dp"
+            android:paddingLeft="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+</FrameLayout>

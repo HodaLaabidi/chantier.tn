@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:id="@+id/layout_connexion_activity"
+    android:layout_height="match_parent"
+    tools:context=".activities.ConnexionActivity"
+    android:orientation="vertical"
+    android:layout_gravity="center_horizontal"
+    android:background="@color/colorWhite"
+    android:gravity="center_horizontal">
+    <View
+        android:id="@+id/animate_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="@color/colorYellow"
+        android:visibility="gone" />
+    <ImageView
+        android:scaleType="fitCenter"
+        android:id="@+id/connexion_logo_c"
+        android:layout_marginTop="80dp"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:src="@drawable/logo_jn"/>
+
+        <tn.chantier.chantiertn.utils.textstyle.RalewayTextView
+            android:layout_marginTop="10dp"
+            android:id="@+id/RalewayTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/text_splash_screen_under_logo_1"
+            android:textAlignment="center"
+            android:textColor="@color/colorBlack"
+            android:textSize="14dp"
+            app:fonttype="bold" />
+   <tn.chantier.chantiertn.utils.textstyle.RalewayTextView
+       android:textAllCaps="true"
+       android:textAlignment="center"
+       android:textColor="@color/colorYellow"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:textSize="14dp"
+       android:text="@string/text_splash_screen_under_logo_2"/>
+
+
+    <tn.chantier.chantiertn.utils.textstyle.RalewayEditText
+        android:textCursorDrawable="@drawable/color_cursor"
+        android:id="@+id/et_login_connexion"
+        android:textColor="@color/colorBlack"
+        android:layout_marginTop="40dp"
+        android:layout_width="300dp"
+        android:inputType="text"
+        android:backgroundTint="@color/colorYellow"
+        android:hint="Adresse e-mail"
+        android:textSize="16sp"
+        android:padding="10dp"
+        android:textColorHint="@color/lightBlack"
+        android:layout_height="wrap_content" />
+    <tn.chantier.chantiertn.utils.textstyle.RalewayEditText
+        android:textCursorDrawable="@drawable/color_cursor"
+        android:id="@+id/et_password_connexion"
+        android:textColor="@color/colorBlack"
+        android:hint="Mot de passe"
+        android:padding="10dp"
+        android:textSize="16sp"
+        android:backgroundTint="@color/colorYellow"
+        android:textColorHint="@color/lightBlack"
+        android:layout_marginTop="20dp"
+        android:layout_width="300dp"
+
+        android:inputType="textPassword"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"/>
+
+    <RelativeLayout
+        android:id="@+id/rl_actions"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <!--
+            <io.rmiri.buttonloading.ButtonLoading
+                android:layout_centerHorizontal="true"
+                android:id="@+id/button_loading"
+                app:BL_backgroundColor="@color/colorWhite"
+                app:BL_circleColor="@color/colorYellow"
+                app:BL_circleColorSecond="@color/colorTranparentYellow"
+                app:BL_stateShow="normal"
+                app:BL_text="@string/connexion"
+                app:BL_enable="true"
+                app:BL_textSize="14sp"
+                app:BL_textColor="@color/colorBlack"
+                app:BL_font="fonts/raleway_regular.ttf"
+                android:layout_width="161dp"
+                android:layout_height="41dp" /> -->
+        <LinearLayout
+            android:gravity="center"
+            android:id="@+id/layout_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.dx.dxloadingbutton.lib.LoadingButton
+                android:id="@+id/button_loading_dxLB"
+                android:layout_width="161dp"
+                android:layout_height="50dp"
+                android:layout_alignStart="@+id/link_forgotten_password"
+                app:lb_btnColor="@color/colorYellow"
+                app:lb_btnText="Connexion"
+                app:lb_textColor="@color/colorBlack" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/button_connexion"
+            android:layout_width="161dp"
+            android:layout_height="41dp"
+            android:layout_marginTop="35dp"
+            android:layout_marginBottom="50dp"
+            android:background="@drawable/background_yellow_button"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <tn.chantier.chantiertn.utils.textstyle.RalewayTextView
+                android:layout_width="161dp"
+                android:layout_height="40dp"
+                android:text="@string/connexion"
+                android:textColor="@color/colorBlack"
+                app:fonttype="semiBold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/link_forgotten_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/layout_button"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            android:orientation="vertical"
+            android:paddingTop="15dp"
+            android:paddingBottom="20dp">
+
+            <tn.chantier.chantiertn.utils.textstyle.RalewayTextView
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:text="@string/reinscription"
+                android:textAlignment="center"
+                android:textColor="@color/colorBlack" />
+
+            <LinearLayout
+                android:layout_width="140dp"
+                android:layout_height="2dp"
+                android:layout_gravity="center"
+                android:background="@color/colorYellow" />
+        </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/progress_bar_connexion"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/inscription_button"
+            android:layout_marginLeft="60dp"
+            android:layout_marginBottom="10dp"
+            android:indeterminateTint="@color/colorTranparentYellow"
+            android:indeterminateTintMode="src_in"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:id="@+id/inscription_button"
+            android:layout_width="161dp"
+            android:layout_height="41dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/background_yellow_stroke_button"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <tn.chantier.chantiertn.utils.textstyle.RalewayTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/inscription"
+                android:textColor="@color/colorBlack"
+                app:fonttype="semiBold" />
+        </LinearLayout>
+    </RelativeLayout>
+
+
+
+
+</LinearLayout>

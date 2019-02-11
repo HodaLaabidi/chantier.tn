@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "958888151673",
+    "firebase_url": "https://chantiertn.firebaseio.com",
+    "project_id": "chantiertn",
+    "storage_bucket": "chantiertn.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:958888151673:android:8d2e86b39c49c4fb",
+        "android_client_info": {
+          "package_name": "tn.chantier.chantiertn"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "958888151673-tguqaap1taum20274aceg3i8l6ocf4p7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "tn.chantier.chantiertn",
+            "certificate_hash": "3cf9f50d6c9710d73b47707280c466f41ca6091b"
+          }
+        },
+        {
+          "client_id": "958888151673-oamhsie8soscf22muqq9ou7u9gtre1c5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDG2nrCUvDgGNvdHOPRPGZgWukkvZSorXw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "958888151673-oamhsie8soscf22muqq9ou7u9gtre1c5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

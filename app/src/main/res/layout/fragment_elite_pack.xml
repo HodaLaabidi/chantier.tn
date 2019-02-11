@@ -1,0 +1,419 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:id="@+id/elite_pack_fragment"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_gravity="center_horizontal"
+    tools:context=".fragments.ElitePackFragment">
+    <LinearLayout
+        android:visibility="gone"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:background="@color/colorYellow"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+            <tn.chantier.chantiertn.utils.textstyle.RalewayTextView
+                android:textColor="@color/colorWhite"
+                android:textAllCaps="true"
+                android:background="@drawable/background_pack_type"
+                android:padding="10dp"
+                android:gravity="center_horizontal"
+                app:fonttype="bold"
+                android:textSize="20sp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/elite_pack"/>
+
+        </LinearLayout>
+        <tn.chantier.chantiertn.utils.textstyle.RalewayTextView
+            android:layout_width="match_parent"
+            android:padding="10dp"
+            android:gravity="center_horizontal"
+            android:text="@string/leads"
+            android:textColor="@color/colorGrey"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:background="@color/colorGrey"
+            android:layout_height="1dp"/>
+        <tn.chantier.chantiertn.utils.textstyle.RalewayTextView
+            android:layout_width="match_parent"
+            android:padding="10dp"
+            android:gravity="center_horizontal"
+            android:text="@string/administration"
+            android:textColor="@color/colorGrey"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:background="@color/colorGrey"
+            android:layout_height="1dp"/>
+        <tn.chantier.chantiertn.utils.textstyle.RalewayTextView
+            android:layout_width="match_parent"
+            android:padding="10dp"
+            android:gravity="center_horizontal"
+            android:text="@string/assistance"
+            android:textColor="@color/colorGrey"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:background="@color/colorGrey"
+            android:layout_height="1dp"/>
+        <tn.chantier.chantiertn.utils.textstyle.RalewayTextView
+            android:layout_width="match_parent"
+            android:padding="10dp"
+            android:gravity="center_horizontal"
+            android:text="@string/bilan"
+            android:textColor="@color/colorGrey"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:background="@color/colorGrey"
+            android:layout_height="1dp"/>
+        <tn.chantier.chantiertn.utils.textstyle.RalewayTextView
+            android:layout_width="match_parent"
+            android:padding="10dp"
+            android:gravity="center_horizontal"
+            android:text="@string/bannier"
+            android:textColor="@color/colorGrey"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:background="@color/colorGrey"
+            android:layout_height="1dp"/>
+        <LinearLayout
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:background="@color/colorGrey"
+            android:padding="10dp"
+            android:gravity="center_horizontal"
+            android:text="@string/blank_pack_case"
+            android:textColor="@color/colorGrey"
+            android:layout_width="40dp"
+            android:layout_height="2dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:background="@color/colorGrey"
+            android:layout_height="1dp"/>
+        <LinearLayout
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:background="@color/colorGrey"
+            android:padding="10dp"
+            android:gravity="center_horizontal"
+            android:text="@string/blank_pack_case"
+            android:textColor="@color/colorGrey"
+            android:layout_width="40dp"
+            android:layout_height="2dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:background="@color/colorGrey"
+            android:layout_height="1dp"/>
+        <tn.chantier.chantiertn.utils.textstyle.RalewayTextView
+            android:textSize="18dp"
+            app:fonttype="bold"
+            android:layout_width="match_parent"
+            android:padding="10dp"
+            android:gravity="center_horizontal"
+            android:text="@string/elite_pack_price"
+            android:textColor="@color/colorGrey"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:background="@color/colorGrey"
+            android:layout_height="1dp"/>
+
+        <Button
+            android:id="@+id/button_elite_pack"
+            android:layout_gravity="center_horizontal"
+            android:textColor="@color/colorBlack"
+            android:text="@string/subscribe_button"
+            android:background="@color/colorYellow"
+            android:layout_marginTop="30dp"
+            android:paddingRight="30dp"
+            android:paddingLeft="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:background="@color/colorWhite"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="30dp">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_weight="10"
+                android:id="@+id/linearLayout2"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/background_black_no_radius">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_weight="10"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <tn.chantier.chantiertn.utils.textstyle.RalewayTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="5dp"
+                            android:text="Elite"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="30sp"
+                            app:fonttype="bold" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="3dp"
+                                android:layout_marginBottom="5dp"
+                                android:background="@color/colorYellow" />
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:src="@drawable/icone_elite" />
+
+                        </LinearLayout>
+
+
+                        <tn.chantier.chantiertn.utils.textstyle.RalewayTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="@string/elite_pack_price"
+                            android:textColor="@color/colorYellow"
+                            android:textSize="26dp"
+                            app:fonttype="bold" />
+
+                        <tn.chantier.chantiertn.utils.textstyle.RalewayTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginBottom="5dp"
+                            android:gravity="center_horizontal"
+                            android:text="@string/pack_duration"
+                            android:textAllCaps="true"
+                            android:textColor="@color/colorDarkGrey"
+                            app:fonttype="semiBold" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginBottom="25dp"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_marginLeft="20dp"
+                            android:layout_weight="1"
+                            android:gravity="left"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="15dp"
+                                android:layout_height="15dp"
+                                android:layout_gravity="center_vertical"
+                                android:src="@drawable/check" />
+
+                            <tn.chantier.chantiertn.utils.textstyle.RalewayTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:gravity="center_horizontal"
+                                android:text="Accès annuel "
+                                android:textColor="@color/colorDarkGrey"
+                                app:fonttype="semiBold" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_marginLeft="20dp"
+                            android:layout_weight="1"
+                            android:gravity="left"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="15dp"
+                                android:layout_height="15dp"
+                                android:layout_gravity="center_vertical"
+                                android:src="@drawable/check" />
+
+                            <tn.chantier.chantiertn.utils.textstyle.RalewayTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:gravity="center_horizontal"
+                                android:text="Demandes illimitées"
+                                android:textColor="@color/colorDarkGrey"
+                                app:fonttype="semiBold" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_marginLeft="20dp"
+                            android:layout_weight="1"
+                            android:gravity="left"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="15dp"
+                                android:layout_height="15dp"
+                                android:layout_gravity="center_vertical"
+                                android:src="@drawable/check" />
+
+                            <tn.chantier.chantiertn.utils.textstyle.RalewayTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:gravity="center_horizontal"
+                                android:text="Espace d'administration"
+                                android:textColor="@color/colorDarkGrey"
+                                app:fonttype="semiBold" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_marginLeft="20dp"
+                            android:layout_weight="1"
+                            android:gravity="left"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="15dp"
+                                android:layout_height="15dp"
+                                android:layout_gravity="center_vertical"
+                                android:src="@drawable/check" />
+
+                            <tn.chantier.chantiertn.utils.textstyle.RalewayTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:gravity="center_horizontal"
+                                android:text="Assistance client"
+                                android:textColor="@color/colorDarkGrey"
+                                app:fonttype="semiBold" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_marginLeft="20dp"
+                            android:layout_weight="1"
+                            android:gravity="left"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="15dp"
+                                android:layout_height="15dp"
+                                android:layout_gravity="center_vertical"
+                                android:src="@drawable/check" />
+
+                            <tn.chantier.chantiertn.utils.textstyle.RalewayTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:gravity="center_horizontal"
+                                android:text="Batiment général"
+                                android:textColor="@color/colorDarkGrey"
+                                app:fonttype="bold" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:gravity="left"
+                            android:layout_marginLeft="10dp"
+                            android:orientation="horizontal">
+
+                            <tn.chantier.chantiertn.utils.textstyle.RalewayTextView
+                                android:layout_width="match_parent"
+                                android:textSize="12sp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:gravity="center_horizontal"
+                                android:text="Projets de sonstruction et rénovation inclus"
+                                android:textColor="@color/colorDarkGrey"
+                                app:fonttype="light" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:id="@+id/btn_send_pack_elite"
+                android:layout_width="140dp"
+                android:layout_height="0dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/background_yellow_button_with_black_stroke"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <tn.chantier.chantiertn.utils.textstyle.RalewayTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Commander"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="14dp"
+                    app:fonttype="bold" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</LinearLayout>
+</LinearLayout>

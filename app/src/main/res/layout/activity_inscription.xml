@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/colorWhite"
+    android:gravity="center_horizontal"
+    tools:context=".activities.InscriptionActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+            <LinearLayout
+                android:id="@+id/ic_arrow_back_inscription"
+                android:gravity="center_vertical"
+                android:padding="15dp"
+                android:background="@color/colorBlack"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+                <ImageView
+                    android:src="@drawable/ic_arrow_back_white"
+                    android:layout_width="45dp"
+                    android:layout_height="30dp" />
+            </LinearLayout>
+            <LinearLayout
+                android:background="@drawable/background_white_button"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_margin="20dp"
+                android:gravity="center">
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <tn.chantier.chantiertn.utils.textstyle.RalewayTextView
+                        android:backgroundTint="@color/colorYellow"
+                        android:textSize="32sp"
+                        app:fonttype="bold"
+                        android:layout_gravity="left"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorBlack"
+                        android:text="@string/text_inscription"/>
+                    <LinearLayout
+                        android:layout_gravity="left"
+                        android:layout_width="match_parent"
+                        android:layout_height="3dp"
+                        android:background="@color/colorYellow"/>
+                </LinearLayout>
+    <tn.chantier.chantiertn.utils.textstyle.RalewayEditText
+        android:textCursorDrawable="@drawable/color_cursor"
+        android:textColor="@color/colorDarkGrey"
+        android:id="@+id/et_first_name"
+        android:layout_width="300dp"
+        android:inputType="text"
+        android:hint="@string/hintLastName"
+        android:textSize="16sp"
+        android:padding="8dp"
+        android:layout_marginTop="50dp"
+        android:textColorHint="@color/colorDarkGrey"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:backgroundTint="@color/colorYellow" />
+    <tn.chantier.chantiertn.utils.textstyle.RalewayEditText
+        android:textCursorDrawable="@drawable/color_cursor"
+        android:textColor="@color/colorDarkGrey"
+        android:id="@+id/et_last_name"
+        android:hint="@string/hintFirstName"
+        android:padding="8dp"
+        android:textSize="16sp"
+        android:textColorHint="@color/colorDarkGrey"
+        android:backgroundTint="@color/colorYellow"
+        android:layout_marginTop="20dp"
+        android:layout_width="300dp"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+    <tn.chantier.chantiertn.utils.textstyle.RalewayEditText
+        android:textCursorDrawable="@drawable/color_cursor"
+        android:textColor="@color/colorDarkGrey"
+        android:id="@+id/et_email"
+        android:hint="@string/hintMail"
+        android:padding="8dp"
+        android:textSize="16sp"
+        android:textColorHint="@color/colorDarkGrey"
+        android:backgroundTint="@color/colorYellow"
+        android:layout_marginTop="20dp"
+        android:layout_width="300dp"
+        android:inputType="textEmailAddress"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+    <tn.chantier.chantiertn.utils.textstyle.RalewayEditText
+        android:textCursorDrawable="@drawable/color_cursor"
+        android:textColor="@color/colorDarkGrey"
+        android:id="@+id/et_phone_number"
+        android:hint="@string/hintPhoneNumber"
+        android:padding="8dp"
+        android:textSize="16sp"
+        android:textColorHint="@color/colorDarkGrey"
+        android:backgroundTint="@color/colorYellow"
+        android:layout_marginTop="20dp"
+        android:layout_width="300dp"
+        android:inputType="phone"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+    <tn.chantier.chantiertn.utils.textstyle.RalewayEditText
+        android:textCursorDrawable="@drawable/color_cursor"
+        android:textColor="@color/colorDarkGrey"
+        android:id="@+id/et_sociaty_name"
+    android:hint="@string/hintSocietyName"
+    android:padding="8dp"
+    android:textSize="16sp"
+    android:textColorHint="@color/colorDarkGrey"
+        android:backgroundTint="@color/colorYellow"
+    android:layout_marginTop="20dp"
+    android:layout_width="300dp"
+    android:inputType="text"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+    <tn.chantier.chantiertn.utils.textstyle.RalewayEditText
+        android:textCursorDrawable="@drawable/color_cursor"
+        android:textColor="@color/colorDarkGrey"
+        android:id="@+id/et_postal_code"
+        android:hint="@string/hintPostalCode"
+        android:padding="8dp"
+        android:textSize="16sp"
+        android:textColorHint="@color/colorDarkGrey"
+        android:backgroundTint="@color/colorYellow"
+        android:layout_marginTop="20dp"
+        android:layout_width="300dp"
+        android:inputType="number"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+    <tn.chantier.chantiertn.utils.textstyle.RalewayEditText
+        android:textCursorDrawable="@drawable/color_cursor"
+        android:textColor="@color/colorDarkGrey"
+        android:id="@+id/et_password"
+        android:hint="@string/hintPassword"
+        android:padding="8dp"
+        android:textSize="16sp"
+        android:textColorHint="@color/colorDarkGrey"
+        android:backgroundTint="@color/colorYellow"
+        android:layout_marginTop="20dp"
+        android:layout_width="300dp"
+        android:inputType="textPassword"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+    <tn.chantier.chantiertn.utils.textstyle.RalewayEditText
+        android:textCursorDrawable="@drawable/color_cursor"
+        android:textColor="@color/colorDarkGrey"
+        android:id="@+id/et_second_password"
+        android:hint="@string/hintPostalCode2"
+        android:padding="8dp"
+        android:textSize="16sp"
+        android:textColorHint="@color/colorDarkGrey"
+        android:backgroundTint="@color/colorYellow"
+        android:layout_marginTop="20dp"
+        android:layout_width="300dp"
+        android:inputType="textPassword"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+                <LinearLayout
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/background_yellow_button"
+                    android:orientation="vertical"
+                    android:id="@+id/button_inscription"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <tn.chantier.chantiertn.utils.textstyle.RalewayTextView
+                        android:gravity="center"
+                        android:layout_gravity="center_horizontal"
+                        android:text="@string/validate_button"
+                        android:textColor="@color/colorBlack"
+                        android:layout_width="161dp"
+                        android:layout_height="40dp" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

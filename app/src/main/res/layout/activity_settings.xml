@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activities.SettingsActivity">
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ChantierTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorBlack"
+            app:title=""
+            app:popupTheme="@style/ChantierTheme.PopupOverlay" >
+            <ImageView
+                android:id="@+id/btn_arrow_back_settings"
+                android:padding="10dp"
+                android:layout_width="45dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_arrow_back_white"/>
+            <ImageView
+                android:scaleType="centerInside"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:src="@drawable/logo_app"
+                android:layout_gravity="left"
+                android:id="@+id/toolbar_title" />
+        </android.support.v7.widget.Toolbar>
+
+    </android.support.design.widget.AppBarLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_margin="2dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+            <LinearLayout
+                android:background="@drawable/background_white_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_margin="20dp"
+                android:gravity="center">
+                <tn.chantier.chantiertn.utils.textstyle.RalewayTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Mes  informations"
+                    app:fonttype="bold"
+                    android:textSize="22sp"
+                    android:textColor="@color/colorBlack"/>
+                <LinearLayout
+                    android:layout_marginBottom="10dp"
+                    android:layout_width="match_parent"
+                    android:background="@color/colorYellow"
+                    android:layout_height="2dp"/>
+            </LinearLayout>
+            <ImageView
+                android:layout_gravity="center_horizontal"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/icone_pro"/>
+                <tn.chantier.chantiertn.utils.textstyle.RalewayEditText
+                    android:textCursorDrawable="@drawable/color_cursor"
+                    android:textColor="@color/colorDarkGrey"
+                    android:id="@+id/et_first_name_settings"
+                    android:layout_width="300dp"
+                    android:inputType="text"
+                    android:hint="@string/hintLastName"
+                    android:textSize="16sp"
+                    android:padding="8dp"
+                    android:layout_marginTop="20dp"
+                    android:textColorHint="@color/colorDarkGrey"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/colorYellow" />
+                <tn.chantier.chantiertn.utils.textstyle.RalewayEditText
+                    android:textCursorDrawable="@drawable/color_cursor"
+                    android:textColor="@color/colorDarkGrey"
+                    android:id="@+id/et_last_name_settings"
+                    android:hint="@string/hintFirstName"
+                    android:padding="8dp"
+                    android:textSize="16sp"
+                    android:textColorHint="@color/colorDarkGrey"
+                    android:backgroundTint="@color/colorYellow"
+                    android:layout_marginTop="20dp"
+                    android:layout_width="300dp"
+                    android:inputType="text"
+                    android:layout_height="wrap_content" />
+                <tn.chantier.chantiertn.utils.textstyle.RalewayEditText
+                    android:textCursorDrawable="@drawable/color_cursor"
+                    android:textColor="@color/colorDarkGrey"
+                    android:id="@+id/et_email_settings"
+                    android:hint="@string/hintMail"
+                    android:padding="8dp"
+                    android:textSize="16sp"
+                    android:textColorHint="@color/colorDarkGrey"
+                    android:backgroundTint="@color/colorYellow"
+                    android:layout_marginTop="20dp"
+                    android:layout_width="300dp"
+                    android:inputType="textEmailAddress"
+                    android:layout_height="wrap_content" />
+                <tn.chantier.chantiertn.utils.textstyle.RalewayEditText
+                    android:textCursorDrawable="@drawable/color_cursor"
+                    android:textColor="@color/colorDarkGrey"
+                    android:id="@+id/et_phone_number_settings"
+                    android:hint="@string/hintPhoneNumber"
+                    android:padding="8dp"
+                    android:textSize="16sp"
+                    android:textColorHint="@color/colorDarkGrey"
+                    android:backgroundTint="@color/colorYellow"
+                    android:layout_marginTop="20dp"
+                    android:layout_width="300dp"
+                    android:inputType="phone"
+                    android:layout_height="wrap_content" />
+                <tn.chantier.chantiertn.utils.textstyle.RalewayEditText
+                    android:textCursorDrawable="@drawable/color_cursor"
+                    android:textColor="@color/colorDarkGrey"
+                    android:id="@+id/et_sociaty_name_settings"
+                    android:hint="@string/hintSocietyName"
+                    android:padding="8dp"
+                    android:textSize="16sp"
+                    android:textColorHint="@color/colorDarkGrey"
+                    android:backgroundTint="@color/colorYellow"
+                    android:layout_marginTop="20dp"
+                    android:layout_width="300dp"
+                    android:inputType="text"
+                    android:layout_height="wrap_content" />
+                <tn.chantier.chantiertn.utils.textstyle.RalewayEditText
+                    android:textCursorDrawable="@drawable/color_cursor"
+                    android:textColor="@color/colorDarkGrey"
+                    android:id="@+id/et_postal_code_settings"
+                    android:hint="@string/hintPostalCode"
+                    android:padding="8dp"
+                    android:textSize="16sp"
+                    android:textColorHint="@color/colorDarkGrey"
+                    android:backgroundTint="@color/colorYellow"
+                    android:layout_marginTop="20dp"
+                    android:layout_width="300dp"
+                    android:inputType="number"
+                    android:layout_height="wrap_content" />
+                <tn.chantier.chantiertn.utils.textstyle.RalewayEditText
+                    android:visibility="gone"
+                    android:textCursorDrawable="@drawable/color_cursor"
+                    android:textColor="@color/colorDarkGrey"
+                    android:id="@+id/et_password_settings"
+                    android:hint="@string/hintPassword"
+                    android:padding="8dp"
+                    android:textSize="16sp"
+                    android:textColorHint="@color/colorDarkGrey"
+                    android:backgroundTint="@color/colorYellow"
+                    android:layout_marginTop="20dp"
+                    android:layout_width="300dp"
+                    android:inputType="textPassword"
+                    android:layout_height="wrap_content" />
+
+                <LinearLayout
+                    android:layout_alignParentStart="true"
+                    android:orientation="vertical"
+                    android:background="@drawable/background_yellow_button"
+                    android:gravity="center_vertical"
+                    android:id="@+id/button_validate_settings"
+                    android:layout_marginTop="40dp"
+                    android:layout_width="161dp"
+                    android:layout_height="41dp">
+                    <tn.chantier.chantiertn.utils.textstyle.RalewayTextView
+                        android:layout_gravity="center_horizontal"
+                        android:text="@string/validate_button"
+                        android:textColor="@color/colorBlack"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+
+        </LinearLayout>
+    </ScrollView>
+
+    </LinearLayout>
+</LinearLayout>

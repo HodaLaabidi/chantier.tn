@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/lightGray"
+    android:layout_height="match_parent"
+    tools:context=".fragments.HomeFragment">
+    <LinearLayout
+        android:id="@+id/ll_background_fragment_home"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:id="@+id/ll_offer_bar"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_height="50dp">
+        <LinearLayout
+            android:layout_weight="12"
+            android:layout_marginLeft="30dp"
+            android:layout_width="0dp"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+        <tn.chantier.chantiertn.utils.textstyle.RalewayTextView
+            android:textAlignment="center"
+            android:layout_width="wrap_content"
+            android:textSize="18sp"
+            app:fonttype="bold"
+            android:layout_height="wrap_content"
+            android:text="@string/offers"
+            android:textColor="@color/colorDarkGrey"/>
+        </LinearLayout>
+        <LinearLayout
+            android:gravity="right"
+            android:layout_weight="1.5"
+            android:id="@+id/filter_button"
+            android:layout_marginRight="30dp"
+           android:layout_gravity="center_vertical"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_gravity="center_vertical"
+                android:gravity="center_horizontal"
+                android:background="@drawable/background_icon_filter"
+                android:layout_width="30dp"
+                android:layout_height="30dp">
+        <ImageView
+            android:layout_gravity="center"
+            android:src="@drawable/filter"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+
+            />
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:background="@color/colorGrey"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"/>
+        <ProgressBar
+            android:visibility="gone"
+            android:layout_marginTop="50dp"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:indeterminateTint="@color/colorTranparentYellow"
+            android:indeterminateTintMode="src_in"
+            android:id="@+id/main_progress_bar"
+            android:layout_height="wrap_content"
+            />
+
+        <ScrollView
+            android:visibility="gone"
+            android:id="@+id/scroll_view_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <android.support.v7.widget.RecyclerView
+                    android:scrollbars="vertical"
+                    android:id="@+id/main_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+        </ScrollView>
+        <RelativeLayout
+            android:background="@color/lightGray"
+            android:id="@+id/rl_filter"
+            android:layout_width="match_parent"
+            android:visibility="visible"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:id="@+id/ll_filter_title"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:background="@color/lightGray"
+                android:layout_width="match_parent"
+                android:layout_height="70dp">
+                <LinearLayout
+                    android:id="@+id/back_button"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp">
+                <ImageView
+                    android:layout_marginLeft="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_keyboard_backspace_black"
+                    android:layout_gravity="center_vertical"/>
+                </LinearLayout>
+                <tn.chantier.chantiertn.utils.textstyle.RalewayTextView
+                    android:gravity="center_horizontal"
+                    android:layout_marginLeft="-40dp"
+                    android:layout_width="match_parent"
+                    android:textSize="18sp"
+                    app:fonttype="bold"
+                    android:textColor="@color/colorDarkGrey"
+                    android:layout_height="wrap_content"
+                    android:text="@string/filter"/>
+            </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/ll_filter_body"
+                    android:layout_below="@id/ll_filter_title"
+                    android:orientation="vertical"
+                    android:background="@color/lightGray"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:background="@color/colorWhite"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <LinearLayout
+                            android:layout_marginLeft="20dp"
+                            android:padding="25dp"
+                            android:background="@color/colorWhite"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <tn.chantier.chantiertn.utils.textstyle.RalewayTextView
+                                android:textSize="16sp"
+                                android:textColor="@color/colorDarkGrey"
+                                android:layout_width="wrap_content"
+                                android:text="@string/sub_categories"
+                                android:layout_height="wrap_content" />
+                            <tn.chantier.chantiertn.utils.textstyle.RalewayTextView
+                                android:layout_width="match_parent"
+                                android:layout_alignParentRight="true"
+                                android:gravity="right"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/colorGrey"
+                                android:textSize="16sp"
+                                android:text="0" />
+
+                        </LinearLayout>
+                        <LinearLayout
+
+                            android:background="@color/lightGray"
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"/>
+                        <LinearLayout
+                            android:id="@+id/layout_city"
+                            android:layout_marginLeft="20dp"
+                            android:padding="25dp"
+                            android:background="@color/colorWhite"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <tn.chantier.chantiertn.utils.textstyle.RalewayTextView
+                                android:id="@+id/tv_city"
+                                android:textSize="16sp"
+                                android:textColor="@color/colorDarkGrey"
+                                android:layout_width="wrap_content"
+                                android:text="@string/region"
+                                android:layout_height="wrap_content" />
+                            <tn.chantier.chantiertn.utils.textstyle.RalewayTextView
+                                android:layout_width="match_parent"
+                                android:layout_alignParentRight="true"
+                                android:gravity="right"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/colorGrey"
+                                android:textSize="16sp"
+                                android:text="0" />
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+                    <tn.chantier.chantiertn.utils.textstyle.RalewayTextView
+                        android:padding="25dp"
+                        android:textColor="@color/colorDarkGrey"
+                        android:layout_marginLeft="20dp"
+                        android:gravity="left"
+                        android:layout_width="match_parent"
+                        android:textSize="16sp"
+                        app:fonttype="bold"
+                        android:text="@string/applicant_type"
+                        android:layout_height="wrap_content" />
+                    <LinearLayout
+                        android:padding="20dp"
+                        android:background="@color/colorWhite"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content">
+                            <android.support.v7.widget.AppCompatCheckBox
+                                android:padding="10dp"
+                                android:id="@+id/checkbox_Par"
+                                android:checked="false"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+                            <tn.chantier.chantiertn.utils.textstyle.RalewayTextView
+                                android:layout_marginLeft="10dp"
+                                android:layout_width="wrap_content"
+                                android:text="Particulier"
+                                android:textSize="16sp"
+                                android:textColor="@color/colorDarkGrey"
+                                android:layout_height="wrap_content" />
+
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content">
+                            <android.support.v7.widget.AppCompatCheckBox
+                                android:padding="10dp"
+                                android:id="@+id/checkbox_prof"
+                                android:checked="false"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+                            <tn.chantier.chantiertn.utils.textstyle.RalewayTextView
+                                android:layout_marginLeft="10dp"
+                                android:layout_width="wrap_content"
+                                android:text="Professionnel"
+                                android:textSize="16sp"
+                                android:textColor="@color/colorDarkGrey"
+                                android:layout_height="wrap_content" />
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+                </LinearLayout>
+            <LinearLayout
+                android:layout_margin="15dp"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/ll_filter_body"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_marginTop="30dp"
+                    android:background="@drawable/background_yellow_button"
+                    android:layout_width="150dp"
+                    android:gravity="center"
+                    android:layout_height="40dp">
+                    <tn.chantier.chantiertn.utils.textstyle.RalewayTextView
+                        android:layout_width="wrap_content"
+                        android:textColor="@color/colorDarkGrey"
+                        android:text="@string/validate_button"
+                        android:layout_gravity="center_vertical"
+                        android:textSize="18sp"
+                        app:fonttype="bold"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:visibility="gone"
+                    android:gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/background_yellow_button"
+                    android:layout_width="150dp"
+                    android:layout_height="40dp">
+                    <tn.chantier.chantiertn.utils.textstyle.RalewayTextView
+                        android:layout_width="wrap_content"
+                        android:textColor="@color/colorDarkGrey"
+                        android:text="@string/reset_button"
+                        android:layout_gravity="center_vertical"
+                        android:textSize="18sp"
+                        app:fonttype="bold"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+        </RelativeLayout>
+    </LinearLayout>
+
+</FrameLayout>

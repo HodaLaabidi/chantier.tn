@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:background="@color/lightGray"
+    android:id="@+id/item_ad"
+    android:layout_marginTop="2dp"
+    android:layout_height="wrap_content">
+
+    <tn.chantier.chantiertn.widgets.NetworkImageView
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:clickable="true"
+        android:id="@+id/ads_gif"/>
+    <LinearLayout
+        android:layout_gravity="center_vertical"
+        android:gravity="center_vertical"
+        android:paddingTop="5dp"
+        android:background="@color/lightGray"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginBottom="5dp"/>
+    <LinearLayout
+        android:visibility="gone"
+        android:gravity="right"
+        android:layout_gravity="right"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:gravity="right"
+            android:src="@drawable/ad"
+            android:layout_width="20dp"
+            android:layout_height="15dp" />
+    <tn.chantier.chantiertn.utils.textstyle.RalewayTextView
+        android:text="@string/ads"
+        android:layout_gravity="center_vertical"
+        android:layout_marginRight="20dp"
+        android:gravity="right"
+        android:layout_marginBottom="5dp"
+        app:fonttype="semiBold"
+        android:textColor="@color/colorYellow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    </LinearLayout>
+
+</LinearLayout>

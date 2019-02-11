@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorYellow"
+    tools:context=".fragments.RelationFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_gravity="center_horizontal"
+        android:orientation="vertical">
+        <ImageView
+            android:id="@+id/img_relation"
+            android:src="@drawable/relation"
+            android:layout_marginTop="100dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:scaleType="centerCrop"
+            android:text="@string/hello_blank_fragment" />
+        <tn.chantier.chantiertn.utils.textstyle.RalewayTextView
+            android:textAllCaps="true"
+            app:fonttype="bold"
+            android:textSize="18sp"
+            android:layout_margin="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/text_relation"
+            android:textColor="@color/colorBlack"
+            android:layout_gravity="center_horizontal"/>
+        <tn.chantier.chantiertn.utils.textstyle.RalewayTextView
+            android:textAlignment="center"
+            android:textSize="16sp"
+            android:layout_margin="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/des_relation"
+            android:textColor="@color/colorBlack"
+            android:layout_gravity="center_horizontal"/>
+    </LinearLayout>
+
+</FrameLayout>

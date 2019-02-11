@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/lightGray"
+    xmlns:chip="http://schemas.android.com/tools"
+    tools:context=".activities.CategoriesActivity">
+    <LinearLayout
+        android:background="@color/colorBlack"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_height="50dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/arrow_back_categories"
+                android:layout_marginLeft="5dp"
+                android:src="@drawable/ic_arrow_back_white"
+                android:layout_width="45dp"
+                android:layout_height="30dp" />
+            <tn.chantier.chantiertn.utils.textstyle.RalewayTextView
+                android:textAlignment="center"
+                android:textAllCaps="true"
+                android:layout_width="wrap_content"
+                android:textSize="16sp"
+                app:fonttype="bold"
+                android:layout_height="wrap_content"
+                android:text="@string/category_list"
+                android:textColor="@color/colorYellow"/>
+            <tn.chantier.chantiertn.utils.textstyle.RalewayTextView
+                android:layout_marginRight="20dp"
+                android:id="@+id/text_action_categories"
+                app:fonttype="bold"
+                android:textAllCaps="true"
+                android:layout_gravity="right"
+                android:textSize="16sp"
+                android:textColor="@color/colorYellow"
+                android:gravity="right"
+                android:text="Choisir"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:background="@color/colorGrey"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"/>
+    <RelativeLayout
+        android:visibility="gone"
+    android:id="@+id/rl_toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="56dp"
+    android:layout_alignParentStart="true"
+    android:layout_alignParentTop="true"
+    android:background="@color/colorYellow">
+
+
+
+    <tn.chantier.chantiertn.utils.textstyle.RalewayTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:fontFamily="fonts/Lato-Regular"
+        app:fonttype="bold"
+        android:gravity="center"
+        android:text="@string/category_list"
+        android:textColor="@color/colorBlack"
+        android:textSize="20sp" />
+</RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+            <ProgressBar
+                android:visibility="gone"
+                android:id="@+id/categories_progress_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20dp"
+                android:indeterminateTint="@color/colorYellow"
+                android:indeterminateTintMode="src_in" />
+            <android.support.v7.widget.RecyclerView
+                android:visibility="gone"
+                android:id="@+id/rv_categories"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </android.support.v7.widget.RecyclerView>
+            <com.plumillonforge.android.chipview.ChipView
+                android:visibility="gone"
+                android:id="@+id/chip_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="17dp"
+                chip:chip_background="@color/colorWhite"
+                chip:chip_background_selected="@color/colorYellow"
+                chip:chip_corner_radius="6dp"
+                chip:chip_line_spacing="20dp"
+                chip:chip_padding="10dp"
+                chip:chip_side_padding="10dp"
+                chip:chip_spacing="16dp"
+                chip:layout_marginVertical="10dp" />
+            <LinearLayout
+                android:layout_margin="10dp"
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+                <tn.chantier.chantiertn.utils.textstyle.RalewayTextView
+                    android:layout_width="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    app:fonttype="bold"
+                    android:textSize="16sp"
+                    android:textColor="@color/colorDarkGrey"
+                    android:text="Alarme et Sécurité"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+            <include layout="@layout/item_cateogories_alarme_securite"/>
+            <LinearLayout
+                android:layout_margin="10dp"
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+                <tn.chantier.chantiertn.utils.textstyle.RalewayTextView
+                    android:layout_width="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    app:fonttype="bold"
+                    android:textSize="16sp"
+                    android:textColor="@color/colorDarkGrey"
+                    android:text="Cloison et faux plafond"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+            <include layout="@layout/item_categories_cloison_faux_plafond"/>
+            <LinearLayout
+                android:layout_margin="10dp"
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+                <tn.chantier.chantiertn.utils.textstyle.RalewayTextView
+                    android:layout_width="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    app:fonttype="bold"
+                    android:textSize="16sp"
+                    android:textColor="@color/colorDarkGrey"
+                    android:text="Conception et Etudes"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+            <include layout="@layout/item_categories_conception_etudes"/>
+            <LinearLayout
+                android:layout_margin="10dp"
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+                <tn.chantier.chantiertn.utils.textstyle.RalewayTextView
+                    android:layout_width="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    app:fonttype="bold"
+                    android:textSize="16sp"
+                    android:textColor="@color/colorDarkGrey"
+                    android:text="Construction et Rénovation"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+            <include layout="@layout/item_categories_construction_renovation"/>
+
+            <LinearLayout
+                android:layout_margin="10dp"
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+                <tn.chantier.chantiertn.utils.textstyle.RalewayTextView
+                    android:layout_width="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    app:fonttype="bold"
+                    android:textSize="16sp"
+                    android:textColor="@color/colorDarkGrey"
+                    android:text="Cuisine et Salle de bains"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+            <include layout="@layout/item_categories_cuisine"/>
+            <LinearLayout
+                android:layout_margin="10dp"
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+                <tn.chantier.chantiertn.utils.textstyle.RalewayTextView
+                    android:layout_width="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    app:fonttype="bold"
+                    android:textSize="16sp"
+                    android:textColor="@color/colorDarkGrey"
+                    android:text="Domotique"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+            <include layout="@layout/item_categories_domotique"/>
+            <LinearLayout
+                android:layout_margin="10dp"
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+                <tn.chantier.chantiertn.utils.textstyle.RalewayTextView
+                    android:layout_width="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    app:fonttype="bold"
+                    android:textSize="16sp"
+                    android:textColor="@color/colorDarkGrey"
+                    android:text="Electricité et éclairage"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+            <include layout="@layout/item_categories_electricite"/>
+            <LinearLayout
+                android:layout_margin="10dp"
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+                <tn.chantier.chantiertn.utils.textstyle.RalewayTextView
+                    android:layout_width="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    app:fonttype="bold"
+                    android:textSize="16sp"
+                    android:textColor="@color/colorDarkGrey"
+                    android:text="Energies renouvelables"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+            <include layout="@layout/item_categories_energies_renouvelables"/>
+            <LinearLayout
+                android:layout_margin="10dp"
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+                <tn.chantier.chantiertn.utils.textstyle.RalewayTextView
+                    android:layout_width="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    app:fonttype="bold"
+                    android:textSize="16sp"
+                    android:textColor="@color/colorDarkGrey"
+                    android:text="Isolation et étanchéité"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+            <include layout="@layout/item_categories_isolation"/>
+            <LinearLayout
+                android:layout_margin="10dp"
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+                <tn.chantier.chantiertn.utils.textstyle.RalewayTextView
+                    android:layout_width="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    app:fonttype="bold"
+                    android:textSize="16sp"
+                    android:textColor="@color/colorDarkGrey"
+                    android:text="Jardin et Piscine"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+            <include layout="@layout/item_categories_jardin"/>
+            <LinearLayout
+                android:layout_margin="10dp"
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+                <tn.chantier.chantiertn.utils.textstyle.RalewayTextView
+                    android:layout_width="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    app:fonttype="bold"
+                    android:textSize="16sp"
+                    android:textColor="@color/colorDarkGrey"
+                    android:text="Peinture"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+            <include layout="@layout/item_categories_peinture"/>
+            <LinearLayout
+                android:layout_margin="10dp"
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+                <tn.chantier.chantiertn.utils.textstyle.RalewayTextView
+                    android:layout_width="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    app:fonttype="bold"
+                    android:textSize="16sp"
+                    android:textColor="@color/colorDarkGrey"
+                    android:text="Plomberie, Chaud, Froid"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+            <include layout="@layout/item_categories_plomberie"/>
+            <LinearLayout
+                android:layout_margin="10dp"
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+                <tn.chantier.chantiertn.utils.textstyle.RalewayTextView
+                    android:layout_width="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    app:fonttype="bold"
+                    android:textSize="16sp"
+                    android:textColor="@color/colorDarkGrey"
+                    android:text="Portail, porte et fenêtre"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+            <include layout="@layout/item_categories_portail"/>
+            <LinearLayout
+                android:layout_margin="10dp"
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+                <tn.chantier.chantiertn.utils.textstyle.RalewayTextView
+                    android:layout_width="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    app:fonttype="bold"
+                    android:textSize="16sp"
+                    android:textColor="@color/colorDarkGrey"
+                    android:text="Revêtement mur"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+            <include layout="@layout/item_categories_revetement_mur"/>
+            <LinearLayout
+                android:layout_margin="10dp"
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+                <tn.chantier.chantiertn.utils.textstyle.RalewayTextView
+                    android:layout_width="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    app:fonttype="bold"
+                    android:textSize="16sp"
+                    android:textColor="@color/colorDarkGrey"
+                    android:text="Revêtement sol"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+            <include layout="@layout/item_categories_revetement_sol"/>
+            <LinearLayout
+                android:gravity="center"
+                android:layout_marginRight="5dp"
+                android:layout_marginLeft="5dp"
+                android:background="@color/lightGray"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/background_yellow_button"
+                    android:orientation="vertical"
+                    android:id="@+id/button_validate_categories"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <tn.chantier.chantiertn.utils.textstyle.RalewayTextView
+                        android:gravity="center"
+                        android:layout_gravity="center_horizontal"
+                        android:text="@string/validate_button"
+                        android:textColor="@color/colorBlack"
+                        android:layout_width="161dp"
+                        android:layout_height="40dp" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+
+
+
+</LinearLayout>

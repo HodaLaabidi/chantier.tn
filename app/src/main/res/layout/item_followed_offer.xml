@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/lightGray"
+    android:id="@+id/item_offer"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:paddingLeft="20dp"
+        android:id="@+id/ll_offer_item"
+        android:background="@color/colorWhite"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="120dp">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="120dp"
+            android:layout_weight="5">
+            <tn.chantier.chantiertn.utils.textstyle.RalewayTextView
+                android:layout_marginTop="10dp"
+                android:layout_gravity="left"
+                android:layout_marginLeft="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rénovation d'un villa de 320m2"
+                android:textColor="@color/colorDarkGrey"
+                android:textSize="14dp"
+                app:fonttype="semiBold"
+                android:id="@+id/item_followed_offer_title"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="10dp"
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <ImageView
+                            android:layout_marginRight="15dp"
+                            android:layout_width="15dp"
+                            android:layout_height="15dp"
+                            android:src="@drawable/ic_item_offer_profil"/>
+                        <tn.chantier.chantiertn.utils.textstyle.RalewayTextView
+                            android:layout_width="wrap_content"
+                            android:textSize="12dp"
+                            app:fonttype="bold"
+                            android:textAllCaps="true"
+                            android:id="@+id/item_followed_offer_owner"
+                            android:textColor="@color/colorDarkGrey"
+                            android:layout_height="wrap_content"
+                            android:text="Particulier" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <ImageView
+                            android:layout_marginRight="15dp"
+                            android:layout_width="15dp"
+                            android:layout_height="15dp"
+                            android:src="@drawable/ic_phone_yellow"/>
+                        <tn.chantier.chantiertn.utils.textstyle.RalewayTextView
+                            android:layout_width="wrap_content"
+                            android:textSize="12dp"
+                            android:id="@+id/item_followed_offer_phone_number"
+                            android:textColor="@color/colorDarkGrey"
+                            android:layout_height="wrap_content"
+                            android:text="Menzah8 ,Tunis" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <ImageView
+                            android:layout_marginRight="15dp"
+                            android:layout_width="15dp"
+                            android:layout_height="15dp"
+                            android:src="@drawable/ic_date_range_yellow"/>
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <tn.chantier.chantiertn.utils.textstyle.RalewayTextView
+                                android:layout_width="wrap_content"
+                                android:textSize="12dp"
+                                android:id="@+id/item_followed_offer_date"
+                                android:textColor="@color/colorDarkGrey"
+                                android:layout_height="wrap_content"
+                                android:text="320 m2" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:background="@color/lightGray"
+            android:layout_width="1dp"
+            android:layout_height="match_parent"/>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            >
+
+            <LinearLayout
+                android:id="@+id/item_icon_call"
+                android:gravity="center_horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+                <ImageView
+                    android:src="@drawable/ic_phone"
+                    android:layout_gravity="center_vertical"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:background="@color/lightGray"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"/>
+            <LinearLayout
+                android:id="@+id/item_icon_send"
+                android:gravity="center_horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+                <ImageView
+                    android:src="@drawable/ic_send_yellow"
+                    android:layout_gravity="center_vertical"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:background="@color/lightGray"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginBottom="20dp"/>
+
+</LinearLayout>

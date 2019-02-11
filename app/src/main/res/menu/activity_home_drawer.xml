@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/item_settings"
+            android:title="Mon compte"
+            android:icon="@drawable/ic_settings"
+            />
+        <item
+            android:id="@+id/item_activities"
+            android:title="Secteurs d'activité"
+            android:icon="@drawable/edit_category"
+            />
+        <item
+            android:id="@+id/item_notification"
+            android:title="Notifications"
+            android:icon="@drawable/ic_notifications_black"/>
+        <item
+            android:icon="@drawable/pack"
+            android:id="@+id/item_pack"
+            android:title="Pack d'abonnements" />
+        <item
+            android:icon="@drawable/ic_phonelink_lock"
+            android:id="@+id/item_déconnexion"
+            android:title="Déconnexion" />
+    </group>
+
+   <!-- <item android:title="Chat avec Chantier"  android:id="@+id/menu_item_communicate"
+        android:iconTint="@color/colorBrown">
+        <menu>
+            <item
+                android:id="@+id/nav_send"
+                android:icon="@drawable/nav_send"
+                android:title="Envoyer" />
+        </menu>
+    </item>  -->
+
+</menu>

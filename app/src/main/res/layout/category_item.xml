@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="7dp"
+    android:background="@color/lightGray"
+    android:gravity="center_vertical"
+    android:id="@+id/category_item">
+    <tn.chantier.chantiertn.widgets.NetworkImageView
+        android:id="@+id/category_icon"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="10dp"
+        android:src="@drawable/logo_c"
+        android:layout_width="35dp"
+        android:layout_height="32dp" />
+    <tn.chantier.chantiertn.utils.textstyle.RalewayTextView
+        android:id="@+id/category_label"
+        android:textAllCaps="true"
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:textColor="@color/colorGrey"
+        android:text="text"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_height="wrap_content" />
+
+
+</LinearLayout>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="RalewayTextView">
+        <attr name="fonttype" format="string">
+            <enum name="regular" value="0" />
+            <enum name="semiBold" value="1" />
+            <enum name="light" value="2" />
+            <enum name="Black" value="3" />
+            <enum name="bold" value="4" />
+        </attr>
+    </declare-styleable>
+</resources>

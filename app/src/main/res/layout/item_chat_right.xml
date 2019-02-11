@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="5dp"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:gravity="center_horizontal">
+        <tn.chantier.chantiertn.utils.textstyle.RalewayTextView
+            android:id="@+id/created_date"
+            android:layout_width="wrap_content"
+            app:fonttype="bold"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorGrey"
+            android:padding="5dp"
+            android:textSize="14dp"
+            android:text="test"/>
+
+    </LinearLayout>
+    <RelativeLayout
+        android:layout_gravity="end"
+        android:layout_width="300dp"
+        android:padding="8dp"
+        android:layout_height="wrap_content">
+
+        <tn.chantier.chantiertn.utils.textstyle.RalewayTextView
+            android:id="@+id/show_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/iv_admin_profil"
+            android:text="Hello"
+            android:textColor="@color/colorBlack"
+            android:textSize="16dp"
+            android:padding="8dp"
+            android:background="@drawable/background_chat_right"
+            android:layout_marginLeft="5dp"/>
+        <ImageView
+            android:layout_marginLeft="8dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:id="@+id/iv_admin_profil"
+            android:layout_width="40dp"
+            android:src="@drawable/icone_pro"
+            android:layout_height="40dp" />
+
+    </RelativeLayout>
+
+</LinearLayout>

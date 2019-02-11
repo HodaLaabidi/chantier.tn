@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:background="@color/lightGray"
+    android:layout_height="match_parent"
+    tools:context=".activities.PackActivity">
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appBarLayout_pack"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ChantierTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar_pack"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorBlack"
+            app:title=""
+            app:popupTheme="@style/ChantierTheme.PopupOverlay" >
+            <ImageView
+                android:id="@+id/btn_arrow_back_pack"
+                android:padding="10dp"
+                android:layout_width="45dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_arrow_back_white"/>
+            <ImageView
+                android:scaleType="centerInside"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:src="@drawable/logo_app"
+                android:layout_gravity="left"
+                android:id="@+id/toolbar_title" />
+        </android.support.v7.widget.Toolbar>
+
+    </android.support.design.widget.AppBarLayout>
+    <lib.kingja.switchbutton.SwitchMultiButton
+        android:id="@+id/switchMBPack"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_gravity="center_horizontal"
+        app:textSize="18dp"
+        app:strokeWidth="2dp"
+        app:selectedTab="0"
+        app:selectedColor="@color/colorYellow"
+        app:strokeRadius="15dp"
+        app:switchTabs="@array/packs"
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
+    <com.plumillonforge.android.chipview.ChipView
+        android:id="@+id/chipview_pack"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/pack_view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"/>
+
+    <FrameLayout
+        android:visibility="gone"
+        android:id="@+id/fragment_pack"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+
+
+
+
+
+</LinearLayout>

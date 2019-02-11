@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/main_nav_home"
+        android:icon="@drawable/business_center"
+        android:title="@string/item_home"
+        />
+    <item
+        android:id="@+id/main_nav_suivi"
+        android:icon="@drawable/folder_special"
+        android:title="@string/item_suivi" />
+    <item
+        android:id="@+id/main_nav_notifications"
+        android:icon="@drawable/notifications"
+        android:title="@string/item_notifications" />
+</menu>
