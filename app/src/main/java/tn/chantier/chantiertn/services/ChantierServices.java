@@ -7,6 +7,8 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
+import retrofit2.http.Query;
 import tn.chantier.chantiertn.models.Contacts;
 
 public interface ChantierServices {
@@ -20,6 +22,8 @@ public interface ChantierServices {
 
     @POST("registerpro")
     Call<ResponseBody> inscriptionChantierService(  @Body JsonObject requestObj);
+    @POST("editpro")
+    Call<ResponseBody> editChantierService(  @Body JsonObject requestObj);
 
     @GET("listeActivites")
     Call<ResponseBody>  getAllSubCategoriesService();
@@ -33,6 +37,10 @@ public interface ChantierServices {
 
     @GET("villes")
     Call<ResponseBody> getCodeCities();
+
+    @GET("gouvernorats")
+    Call<ResponseBody>  getGouvernerats();
+
 
     @POST("getDemande")
     Call<ResponseBody> getOfferDetails(@Body JsonObject requestObject);
@@ -61,5 +69,15 @@ public interface ChantierServices {
 
     @POST("getAds")
     Call<ResponseBody> getAds();
+
+    @GET("getAllTopics")
+    Call<ResponseBody> getAllTopics();
+
+    @POST("getTopics")
+        Call<ResponseBody> getMyTopics(@Body JsonObject id);
+
+    @POST("filter")
+    Call<ResponseBody> getFiltredOffers(@Body JsonObject requestObject) ;
+
 
 }

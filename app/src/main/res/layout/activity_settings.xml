@@ -175,7 +175,7 @@
                     android:background="@drawable/background_yellow_button"
                     android:gravity="center_vertical"
                     android:id="@+id/button_validate_settings"
-                    android:layout_marginTop="40dp"
+                    android:layout_marginTop="30dp"
                     android:layout_width="161dp"
                     android:layout_height="41dp">
                     <tn.chantier.chantiertn.utils.textstyle.RalewayTextView

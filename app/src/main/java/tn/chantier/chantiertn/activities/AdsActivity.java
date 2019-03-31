@@ -32,9 +32,14 @@ public class AdsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ads);
         ButterKnife.bind(this);
-        Intent intent = new Intent(Intent.ACTION_VIEW , Uri.parse("http://www.comaf.tn/"));
-        startActivity(intent);
-        finish();
+        if ( getIntent().getExtras() != null) {
+            String webURL = getIntent().getStringExtra("web_url");
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(webURL));
+            startActivity(intent);
+            finish();
+        } else {
+            finish();
+        }
     }
 
     @Override

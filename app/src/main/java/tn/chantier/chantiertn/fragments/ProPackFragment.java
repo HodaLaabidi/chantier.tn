@@ -28,6 +28,7 @@ import tn.chantier.chantiertn.activities.CategoriesActivity;
 import tn.chantier.chantiertn.activities.ConnexionActivity;
 import tn.chantier.chantiertn.activities.classes.MyApplication;
 import tn.chantier.chantiertn.factories.RetrofitServiceFactory;
+import tn.chantier.chantiertn.factories.SharedPreferencesFactory;
 import tn.chantier.chantiertn.utils.textstyle.RalewayTextView;
 
 
@@ -94,6 +95,7 @@ public class ProPackFragment extends android.support.v4.app.Fragment {
             public void onClick(View v) {
                 JsonObject postPArams = new JsonObject();
                 postPArams.addProperty("pack","pro" );
+                postPArams.addProperty("id_client", SharedPreferencesFactory.retrieveUserData().getId());
                 Call<ResponseBody> call = RetrofitServiceFactory.getChantierService().sendPackRequest(postPArams);
                 call.enqueue(new Callback<ResponseBody>() {
                     @Override

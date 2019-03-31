@@ -1,5 +1,6 @@
 package tn.chantier.chantiertn.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
@@ -29,9 +30,17 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.messaging.FirebaseMessaging;
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import com.google.gson.reflect.TypeToken;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -43,9 +52,13 @@ import tn.chantier.chantiertn.factories.SharedPreferencesFactory;
 import tn.chantier.chantiertn.fragments.ActivityLogFragment;
 import tn.chantier.chantiertn.fragments.HomeFragment;
 import tn.chantier.chantiertn.fragments.NotificationsFragment;
+import tn.chantier.chantiertn.models.Ads;
 import tn.chantier.chantiertn.models.Professional;
+import tn.chantier.chantiertn.models.Topic;
+import tn.chantier.chantiertn.notifications.MyFirebaseIdService;
 import tn.chantier.chantiertn.notifications.MyFirebaseMessaging;
 import tn.chantier.chantiertn.utils.Utils;
+import tn.chantier.chantiertn.utils.UtilsSharefPreferences;
 import tn.chantier.chantiertn.utils.textstyle.RalewayTextView;
 
 import static tn.chantier.chantiertn.notifications.MyFirebaseMessaging.refreshedToken;
@@ -72,6 +85,8 @@ public class HomeActivity extends AppCompatActivity
     private HomeFragment homeFragment ;
     private NotificationsFragment notificationsFragment ;
     private ActivityLogFragment activityLogFragment ;
+    public static   ArrayList<Topic> alltopics , myTopics;
+
 
 
     @Override
@@ -96,11 +111,14 @@ public class HomeActivity extends AppCompatActivity
 
     }
 
-    private void sendFirebaseTokenToBackEnd() {
+    private void sendFirebaseTokenToBackEnd(){
+
+        firebaseSubscription(getBaseContext());
         if (refreshedToken != null) {
             JsonObject postParams = new JsonObject();
             postParams.addProperty("id_client",professional.getId());
             postParams.addProperty("reg_token", refreshedToken);
+            postParams.addProperty("iid" , FirebaseInstanceId.getInstance().getId() );
 
             Call<ResponseBody> call = RetrofitServiceFactory.getChantierService().sendRegToken(postParams);
             call.enqueue(new retrofit2.Callback<ResponseBody>() {
@@ -125,6 +143,104 @@ public class HomeActivity extends AppCompatActivity
                 }
             });
         }
+
+    }
+
+    public static void firebaseSubscription(Context context) {
+
+         alltopics = new ArrayList<>() ;
+         myTopics = new ArrayList<>();
+        if (!UtilsSharefPreferences.getSplashScreenState(context)){
+            Call call = RetrofitServiceFactory.getChantierService().getAllTopics();
+            call.enqueue(new  retrofit2.Callback<ResponseBody>() {
+                @Override
+                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                    if ( response.code() == 200){
+                        try {
+
+                            JSONArray jsonObject= null;
+
+                            Gson gson = Utils.getGsonInstance();
+                            String remoteResponse= response.body().string();
+                            Log.e("get all topics", remoteResponse);
+                            jsonObject = new JSONArray(remoteResponse);
+                            Type type = new TypeToken<ArrayList<Topic>>() {
+                            }.getType();
+                            alltopics  = gson.fromJson(jsonObject.toString(), type);
+                            for (int i = 0 ; i < alltopics.size(); i++) {
+                                FirebaseMessaging.getInstance().unsubscribeFromTopic(alltopics.get(i).getTopic());
+                                Log.e("unsubscribe "+i , "ok");
+                            }
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                }
+            });
+
+        }
+        JsonObject postParams2 = new JsonObject();
+        postParams2.addProperty("id_client" , SharedPreferencesFactory.retrieveUserData().getId()+"");
+
+        Call call2 = RetrofitServiceFactory.getChantierService().getMyTopics(postParams2);
+        call2.enqueue(new  retrofit2.Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if ( response.code() == 200){
+                    try {
+
+                        JSONArray jsonObject= null;
+
+                        Gson gson = Utils.getGsonInstance();
+                        String remoteResponse= response.body().string();
+                        Log.e("getMyTopics", remoteResponse);
+                        jsonObject = new JSONArray(remoteResponse);
+
+                        for (int i = 0; i < jsonObject.length(); i++)
+                        {
+                            JSONObject jsonObj = jsonObject.getJSONObject(i);
+
+                            Log.e("json object "+i, jsonObj.toString());
+                        }
+                        Type type = new TypeToken<ArrayList<Topic>>() {
+                        }.getType();
+                        myTopics  = gson.fromJson(jsonObject.toString(), type);
+                        for (int i = 0 ; i < myTopics.size(); i++) {
+                            final int finalI = i;
+                            FirebaseMessaging.getInstance().subscribeToTopic(myTopics.get(i).getTopic())
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if ( ! task.isSuccessful()){
+                                                Log.e("subscribe to topic" , "subscribe failed"+"");
+                                                Log.e("subscribe "+ finalI, "no");
+                                            } else {
+                                                Log.e("subscribe to topic" , "subscribe successed");
+                                                Log.e("subscribe "+ finalI, "ok");
+                                            }
+                                        }
+                                    });
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
 
     }
 
@@ -154,6 +270,7 @@ public class HomeActivity extends AppCompatActivity
         homeFragment = new HomeFragment();
         notificationsFragment = new NotificationsFragment();
         activityLogFragment = new ActivityLogFragment();
+
         if (Utils.isNotification) {
             mainNavBar.getMenu().getItem(2).setChecked(true);
             setFragment(notificationsFragment);
@@ -164,6 +281,40 @@ public class HomeActivity extends AppCompatActivity
         }else {
             mainNavBar.getMenu().getItem(0).setChecked(true);
             setFragment(homeFragment);
+
+        }
+        if (getIntent() != null) {
+            if (getIntent().getExtras() != null) {
+
+                final Bundle extras = getIntent().getExtras();
+
+                String getFromDetailActivity = extras.getString("from_detail_activity");
+
+                if (getFromDetailActivity.equals("ok")) {
+                    Log.e("from_detail_activity", "ok");
+                    mainNavBar.getMenu().getItem(0).setChecked(true);
+                    setFragment(activityLogFragment);
+
+                }
+
+                if (getFromDetailActivity.equals("no")) {
+                    mainNavBar.getMenu().getItem(0).setChecked(true);
+                    setFragment(homeFragment);
+                    Log.e("from_detail_activity", "no");
+                }
+            }
+
+
+        }
+
+        Intent appLinkIntent = getIntent();
+        String appLinkAction = appLinkIntent.getAction();
+
+        if (Intent.ACTION_VIEW == appLinkAction){
+
+            setFragment(homeFragment);
+
+
 
         }
 
@@ -373,7 +524,7 @@ public class HomeActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    private void setFragment(Fragment fragment) {
+    public void setFragment(Fragment fragment) {
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.main_frame , fragment);
@@ -419,8 +570,6 @@ public class HomeActivity extends AppCompatActivity
             startActivity(intent);
             finish();
 
-        } else if (id == R.id.item_notification){
-            // settings notifications
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

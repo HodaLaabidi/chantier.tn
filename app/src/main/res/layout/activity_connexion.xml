@@ -10,6 +10,7 @@
     android:layout_gravity="center_horizontal"
     android:background="@color/colorWhite"
     android:gravity="center_horizontal">
+
     <View
         android:id="@+id/animate_view"
         android:layout_width="match_parent"
@@ -187,8 +188,6 @@
                 app:fonttype="semiBold" />
         </LinearLayout>
     </RelativeLayout>
-
-
 
 
 </LinearLayout>

@@ -3,10 +3,175 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.NotificationsFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_marginTop="8dp"
+            android:id="@+id/ll_notification"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="47dp">
+            <LinearLayout
+                android:layout_marginTop="6dp"
+                android:layout_marginBottom="13dp"
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_marginLeft="30dp"
+                    android:layout_width="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_height="match_parent">
+                    <tn.chantier.chantiertn.utils.textstyle.RalewayTextView
+                        android:textAlignment="center"
+                        android:layout_width="match_parent"
+                        android:textSize="18sp"
+                        app:fonttype="bold"
+                        android:layout_height="wrap_content"
+                        android:text="Notifications"
+                        android:textColor="@color/colorDarkGrey"/>
+                    <LinearLayout
+                        android:background="@color/colorYellow"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"/>
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:background="@color/colorGrey"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"/>
+        </LinearLayout>
+        <ProgressBar
+            android:visibility="gone"
+            android:layout_marginTop="50dp"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:indeterminateTint="@color/colorTranparentYellow"
+            android:indeterminateTintMode="src_in"
+            android:id="@+id/progress_bar_notifications"
+            android:layout_height="wrap_content"
+            />
+        <LinearLayout
+            android:visibility="gone"
+            android:id="@+id/layout_no_notifications"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:background="@android:color/white"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageView
+                android:layout_gravity="center"
+                android:src="@drawable/no_notifications"
+                android:layout_width="200dp"
+                android:layout_weight="3.5"
+                android:layout_height="0dp" />
+            <LinearLayout
+
+                android:orientation="vertical"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp">
+                <tn.chantier.chantiertn.utils.textstyle.RalewayTextView
+                    android:layout_width="match_parent"
+                    android:gravity="center_horizontal"
+                    app:fonttype="bold"
+                    android:textAllCaps="true"
+                    android:textSize="16sp"
+                    android:textColor="@color/colorBlack"
+                    android:text="Aucune notification"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+        </LinearLayout>
+        <LinearLayout
+            android:visibility="gone"
+            android:id="@+id/layout_no_connexion_from_notification_fragment"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:background="@android:color/white"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/image_dialog"
+                android:layout_gravity="center"
+                android:src="@drawable/noconnexion"
+                android:layout_width="300dp"
+                android:layout_weight="3"
+                android:layout_height="0dp" />
+            <LinearLayout
+                android:gravity="center"
+                android:orientation="vertical"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp">
+                <tn.chantier.chantiertn.utils.textstyle.RalewayTextView
+                    android:id="@+id/text_layout_dialog_one"
+                    android:layout_width="match_parent"
+                    android:gravity="center_horizontal"
+                    app:fonttype="bold"
+                    android:textAllCaps="true"
+                    android:textSize="16sp"
+                    android:textColor="@color/colorBlack"
+                    android:text="veuillez vérifier votre"
+                    android:layout_height="wrap_content" />
+                <tn.chantier.chantiertn.utils.textstyle.RalewayTextView
+                    android:id="@+id/text_layout_dialog_two"
+                    android:layout_width="match_parent"
+                    android:gravity="center_horizontal"
+                    app:fonttype="bold"
+                    android:textAllCaps="true"
+                    android:textSize="16sp"
+                    android:textColor="@color/colorBlack"
+                    android:text="connexion et réessayer"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="0dp">
+                <LinearLayout
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <LinearLayout
+                        android:id="@+id/button_reset_connexion_notifications"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:background="@drawable/background_yellow_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        <tn.chantier.chantiertn.utils.textstyle.RalewayTextView
+                            android:layout_margin="7dp"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            app:fonttype="semiBold"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="18sp"
+                            android:text="Réessayer"
+                            android:layout_width="140dp"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/list_notifications"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -23,5 +188,6 @@
         android:layout_height="match_parent"/>
             </LinearLayout>
         </ScrollView>
+    </LinearLayout>
     </LinearLayout>
 </FrameLayout>

@@ -9,11 +9,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
+
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.load.resource.drawable.GlideDrawable;
-import com.bumptech.glide.request.RequestListener;
-import com.bumptech.glide.request.target.Target;
 import com.makeramen.roundedimageview.RoundedTransformationBuilder;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
@@ -37,64 +34,8 @@ public class NetworkImageView extends android.support.v7.widget.AppCompatImageVi
         super(context, attrs, defStyle);
     }
 
-    public void setImageUriWithoutProgress(final String imageURL, final Context context) {
-        this.imageURL = imageURL;
-        if (imageURL != null && context != null) {
 
-            Glide
-                    .with(context)
-                    .load(imageURL)
-                    .centerCrop()
-                    .crossFade()
-                    .listener(new RequestListener<String, GlideDrawable>() {
-                        @Override
-                        public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
 
-                            if (isFirstResource)
-                                setImageUriWithoutProgress(imageURL,context);
-                            return false;
-                        }
-
-                        @Override
-                        public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
-
-                            return false;
-                        }
-                    })
-                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                    .into(this);
-        }
-    }
-
-    public void setImageUrlWithoutBorderWithResizing(final String imageURL, final Context context, final ProgressBar progressBar) {
-
-        this.imageURL = imageURL;
-        if (imageURL != null && context != null) {
-
-            Glide
-                    .with(context)
-                    .load(imageURL)
-                    .listener(new RequestListener<String, GlideDrawable>() {
-                        @Override
-                        public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
-                            progressBar.setVisibility(GONE);
-                            if (isFirstResource)
-                                setImageUrlWithoutBorderWithResizing(imageURL,context, progressBar);
-                            return false;
-                        }
-
-                        @Override
-                        public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
-                            progressBar.setVisibility(GONE);
-                            return false;
-                        }
-                    })
-                    .override(200,200)
-                    .centerCrop()
-                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                    .into(this);
-        }
-    }
     public void setImageUrl(String imageURL, final int defaultImgRes) {
         this.imageURL = imageURL;
         if (this.imageURL != null && !this.imageURL.equals("")) {
@@ -190,7 +131,7 @@ public class NetworkImageView extends android.support.v7.widget.AppCompatImageVi
                 .borderColor(Color.parseColor(BorderColor))
                 .borderWidthDp((float) 3.0)
                 .build();
-        Picasso.with(getContext()).load(imageRes).transform(transformation).resize(400, 400).centerCrop().into(this);
+        Picasso.with(getContext().getApplicationContext()).load(imageRes).transform(transformation).resize(400, 400).centerCrop().into(this);
     }
 
     public void setImageUrl(String imageURL) {
@@ -205,7 +146,7 @@ public class NetworkImageView extends android.support.v7.widget.AppCompatImageVi
     }
     public void  setGifImageUrl(String URL){
         this.imageURL = URL;
-        Glide.with(getContext()).load(imageURL).asGif().centerCrop().into(this);
+        Glide.with(getContext().getApplicationContext()).load(imageURL).centerCrop().into(this);
 
     }
 
@@ -218,17 +159,17 @@ public class NetworkImageView extends android.support.v7.widget.AppCompatImageVi
     public void setImageUrlWithoutBorderWithoutResizing(String imageURL) {
         this.imageURL = imageURL;
         if (imageURL != null && !imageURL.equals("") && getContext() != null)
-            Glide.with(getContext().getApplicationContext()).load(imageURL).into(this);
+            Glide.with(getContext().getApplicationContext()).load(imageURL).centerCrop().into(this);
     }
 
     public void setImageUrlWithoutBorderWithoutResizing(String imageURL, int defaultIcon) {
         this.imageURL = imageURL;
         if (imageURL != null && !imageURL.equals("") && getContext() != null)
-            Glide.with(getContext().getApplicationContext()).load(imageURL).centerCrop().into(this);
+            Glide.with(getContext().getApplicationContext()).load(imageURL).into(this);
         else if (getContext() != null)
-            Glide.with(getContext().getApplicationContext()).load(defaultIcon).centerCrop().into(this);
+            Glide.with(getContext().getApplicationContext()).load(defaultIcon).into(this);
         else if (imageURL == null || imageURL == ""){
-            Glide.with(getContext().getApplicationContext()).load(defaultIcon).asGif().centerCrop().into(this);
+            Glide.with(getContext().getApplicationContext()).load(defaultIcon).centerCrop().into(this);
         }
     }
 
@@ -256,7 +197,7 @@ public class NetworkImageView extends android.support.v7.widget.AppCompatImageVi
     public void setImageUri(Uri imageURL) {
 
         if (imageURL != null && getContext() != null)
-            Glide.with(getContext().getApplicationContext()).load(imageURL).into(this);
+            Glide.with(getContext().getApplicationContext()).load(imageURL).centerCrop().into(this);
     }
 
     @Override
@@ -276,11 +217,11 @@ public class NetworkImageView extends android.support.v7.widget.AppCompatImageVi
                 .borderColor(Color.parseColor("#ffffff"))
                 .borderWidthDp((float) 3.0)
                 .build();
-        Glide.with(getContext().getApplicationContext()).load(imageRes).asGif().centerCrop().into(this);
+        Glide.with(getContext().getApplicationContext()).load(imageRes).centerCrop().into(this);
     }
 
     public void setImageResourceRaw(int imageRes) {
         if (getContext() != null)
-            Glide.with(getContext().getApplicationContext()).load(imageRes).into(this);
+            Glide.with(getContext().getApplicationContext()).load(imageRes).centerCrop().into(this);
     }
 }

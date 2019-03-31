@@ -14,6 +14,8 @@ import android.util.Log;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.inappmessaging.FirebaseInAppMessaging;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import java.util.ArrayList;
@@ -35,6 +37,8 @@ public class MyFirebaseMessaging extends FirebaseMessagingService {
       public static String refreshedToken = null;
      public static  String date = null;
 
+
+
     @Override
     public void onDeletedMessages() {
         super.onDeletedMessages();
@@ -42,12 +46,15 @@ public class MyFirebaseMessaging extends FirebaseMessagingService {
 
     @Override
     public void onNewToken(String s) {
+        Log.e(" inAppMessaging id " , FirebaseInAppMessaging.getInstance().toString()+ " !");
+        Log.e(" inAppMessaging id " , FirebaseInstanceId.getInstance().getId()+ " !");
         refreshedToken = s;
 
 
 
 
     }
+
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {

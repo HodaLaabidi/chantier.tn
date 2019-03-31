@@ -28,6 +28,7 @@ import tn.chantier.chantiertn.R;
 import tn.chantier.chantiertn.factories.RetrofitServiceFactory;
 import tn.chantier.chantiertn.utils.Utils;
 import tn.chantier.chantiertn.utils.textstyle.RalewayEditText;
+import tn.chantier.chantiertn.utils.textstyle.RalewayTextView;
 import tn.chantier.chantiertn.widgets.UI.CustomToast;
 
 public class ReinitializationPasswordActivity extends AppCompatActivity {
@@ -41,7 +42,9 @@ public class ReinitializationPasswordActivity extends AppCompatActivity {
     Dialog dialog;
     @BindView(R.id.ic_arrow_back_connexion)
     LinearLayout arrowBackConnexion ;
-    private final static int Reinitialization_TIME_OUT = 8000;
+    @BindView(R.id.text_congratulations)
+    RalewayTextView textCongratulations ;
+    private final static int Reinitialization_TIME_OUT = 4000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -150,37 +153,13 @@ public class ReinitializationPasswordActivity extends AppCompatActivity {
             }
 
             private void validateReinitialization(){
-     /*
-     final LayoutInflater inflater = LayoutInflater.from(context);
-                final AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.AppCompatAlertDialogStyleSuggest);
-                final View customDialog = inflater.inflate(R.layout.dialog_cities, null , false);
-                final AlertDialog alertDialog = builder.create();
-                alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                alertDialog.setView(customDialog);
-                tvConfirm = customDialog.findViewById(R.id.tv_confirm);
-                tvTunis = customDialog.findViewById(R.id.label_tunis);
-                etCities = customDialog.findViewById(R.id.tv_region_place);
-                tvRetour = customDialog.findViewById(R.id.tv_retour);
-                tvRetour.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-
-                        alertDialog.dismiss();
-                    }
-                });
-                tvTunis.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        onConfirmCitiesSelectListener.OnConfirmCitiesSelectListener(new City("1000", context.getString(R.string.label_grand_tunis)));
-                        alertDialog.dismiss();
-                    }
-                });*/
                 final LayoutInflater inflater = LayoutInflater.from(ReinitializationPasswordActivity.this);
                 final AlertDialog.Builder builder = new AlertDialog.Builder(ReinitializationPasswordActivity.this, R.style.AppCompatAlertDialogStyleSuggest);
                 final View customDialog = inflater.inflate(R.layout.pop_up_reset_password, null , false);
                 final AlertDialog alertDialog = builder.create();
                 alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 alertDialog.setView(customDialog);
+                textCongratulations.setText("Vous pouvez maintenant consulter votre boîte mail !");
                 alertDialog.show();
                 LinearLayout goToConnexionButton = customDialog.findViewById(R.id.btn_go_to_connexion);
                 goToConnexionButton.setOnClickListener(new View.OnClickListener() {
@@ -203,6 +182,10 @@ public class ReinitializationPasswordActivity extends AppCompatActivity {
                     public void run() {
 
                         alertDialog.dismiss();
+                        Intent intent = new Intent( ReinitializationPasswordActivity.this , ConnexionActivity.class);
+                        startActivity(intent);
+
+                        finish();
 
 
                     }

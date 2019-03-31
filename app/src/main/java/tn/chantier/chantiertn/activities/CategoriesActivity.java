@@ -65,6 +65,7 @@ public class CategoriesActivity extends AppCompatActivity{
 
     private static final String TAG_ACT ="CategoriesActivity";
     private static final int CATEGORIES_TIME_OUT = 2000;
+    private static ArrayList<EditableSubCategory> editableSubCategories = new ArrayList<>();
 
     @BindView(R.id.rv_categories)
     RecyclerView recyclerViewCategories;
@@ -387,7 +388,12 @@ public class CategoriesActivity extends AppCompatActivity{
 
 
             } else {
-                postParams.addProperty("id_client", "1980");
+                // test id from inscriptionactivity
+                if(getIntent().getStringExtra("id_new_client") != null ) {
+                    postParams.addProperty("id_client",   getIntent().getStringExtra("id_new_client"));
+                } else {
+                    postParams.addProperty("id_client", SharedPreferencesFactory.retrieveUserData().getId() + "");
+                }
                 postParams.add("secteurs", jsonArray);
                 if ( editCategories != null){
                     if ( editCategories.equalsIgnoreCase("yes")){
@@ -506,12 +512,12 @@ public class CategoriesActivity extends AppCompatActivity{
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.code() == 200){
-                    Log.e(" Editable SC object" , response.body().toString());
-                    ArrayList<EditableSubCategory> editableSubCategories = new ArrayList<>();
+
                     JSONArray jsonArray = null ;
                     Gson gson = Utils.getGsonInstance();
                     try {
-                        jsonArray = new JSONArray(response.body().string());
+                        String remoteResponse = response.body().string()+"";
+                        jsonArray = new JSONArray(remoteResponse);
                         Type type = new TypeToken<ArrayList<EditableSubCategory>>(){
 
                         }.getType();
@@ -579,10 +585,10 @@ public class CategoriesActivity extends AppCompatActivity{
                 if ((count == MAX_LIMIT) &&  isChecked){
 
                     buttonView.setChecked(false);
-                    if (editCategories == null) {
+
                         new CustomToast(CategoriesActivity.this, getResources().getString(R.string.warning), getResources().getString(R.string.Warning), R.drawable.ic_warning, CustomToast.WARNING).show();
 
-                    }
+
 
                 } else if (isChecked){
                     if (count == 1 && editCategories != null  ){

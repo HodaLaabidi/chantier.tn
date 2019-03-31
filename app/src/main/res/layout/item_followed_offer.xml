@@ -15,6 +15,7 @@
         android:layout_height="120dp">
 
         <LinearLayout
+            android:id="@+id/ll_go_to_followed_offer_detail"
             android:orientation="vertical"
             android:layout_width="0dp"
             android:layout_height="120dp"
@@ -143,7 +144,7 @@
                 android:layout_height="0dp"
                 android:layout_weight="1">
                 <ImageView
-                    android:src="@drawable/ic_send_yellow"
+                    android:src="@drawable/mail"
                     android:layout_gravity="center_vertical"
                     android:layout_width="20dp"
                     android:layout_height="20dp" />

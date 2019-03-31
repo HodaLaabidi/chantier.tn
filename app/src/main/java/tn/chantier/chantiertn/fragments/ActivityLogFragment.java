@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.ScrollView;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -54,6 +56,7 @@ public class ActivityLogFragment extends Fragment {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private static final long WAITING_FOR_RESET_Connexion = 600;
     View rootView ;
     private ArrayList<FollowedOffer> followedOffers ;
     FollowedOffersFragmentAdapter followedOffersFragmentAdapter;
@@ -61,6 +64,16 @@ public class ActivityLogFragment extends Fragment {
     ProgressBar pbFollowedOffersFragment;
     @BindView(R.id.rv_followed_offers)
     RecyclerView rvFollowedOffers ;
+    @BindView(R.id.ll_followed_offer)
+    LinearLayout llFollowedOffer ;
+    @BindView(R.id.sv_followed_offers)
+    ScrollView svFollowedOffers ;
+    @BindView(R.id.layout_no_followed_offers)
+    LinearLayout layoutNoFollowedOffers;
+    @BindView(R.id.layout_no_connexion_followed_offers)
+    LinearLayout layoutNoConnexionFollowedOffers ;
+    @BindView(R.id.button_reset_connexion_followed_offers)
+    LinearLayout buttonResetConnexionFollowedOffers ;
 
 
 
@@ -100,16 +113,42 @@ public class ActivityLogFragment extends Fragment {
     private void initialiseFragment() {
 
         ButterKnife.bind(this , rootView);
-        pbFollowedOffersFragment.setVisibility(View.GONE);
+
     }
 
 
     private void browseLisrOfFollowedOffers() {
-
+        pbFollowedOffersFragment.setVisibility(View.VISIBLE);
         if ( ! ConnectivityService.isOnline(getContext())){
-            new CustomToast(MyApplication.getAppContext(), getResources().getString(R.string.error), getResources().getString(R.string.verify_internet), R.drawable.ic_erreur, CustomToast.ERROR).show();
+            pbFollowedOffersFragment.setVisibility(View.GONE);
+            layoutNoFollowedOffers.setVisibility(View.GONE);
+            Utils.setBackgroundColor(getContext() , llFollowedOffer , R.color.colorWhite);
+            svFollowedOffers.setVisibility(View.GONE);
+
+            layoutNoConnexionFollowedOffers.setVisibility(View.VISIBLE);
+            buttonResetConnexionFollowedOffers.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    pbFollowedOffersFragment.setVisibility(View.VISIBLE);
+                    layoutNoConnexionFollowedOffers.setVisibility(View.GONE);
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+
+                            browseLisrOfFollowedOffers();
+                        }
+                    }, WAITING_FOR_RESET_Connexion);
+                }
+            });
+
+
 
         } else {
+            layoutNoFollowedOffers.setVisibility(View.GONE);
+            svFollowedOffers.setVisibility(View.VISIBLE);
+            layoutNoConnexionFollowedOffers.setVisibility(View.GONE);
+            Utils.setBackgroundColor(getContext() , llFollowedOffer , R.color.lightGray);
+
             pbFollowedOffersFragment.setVisibility(View.VISIBLE);
 
             final JsonObject postParams = new JsonObject();
@@ -119,35 +158,44 @@ public class ActivityLogFragment extends Fragment {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 
-                    Log.e(" on response code" , response.code()+ " !");
-                    Log.e(" on response code" , response.body().toString()+ " !");
                     if ( response.code() == 200){
-                        Log.e("statut", SharedPreferencesFactory.retrieveUserData().toString());
+                        Log.e("status", SharedPreferencesFactory.retrieveUserData().toString());
                         pbFollowedOffersFragment.setVisibility(View.GONE);
                         JSONArray jsonArray= null;
                         Gson gson = Utils.getGsonInstance();
 
+
                             try {
-                                jsonArray = new JSONArray( response.body().string());
+                                String remoteResponse = response.body().string();
+                                jsonArray = new JSONArray( remoteResponse);
                                 Type type = new TypeToken<ArrayList<FollowedOffer>>(){
 
                                 }.getType();
                                 followedOffers = gson.fromJson(jsonArray.toString() , type);
 
 
-                            for (int i = 0 ; i < followedOffers.size() ; i++){
-                                Log.e( " followed offer values" , followedOffers.get(i).getNom_client());
+                            if (followedOffers.size() == 0){
+                                layoutNoFollowedOffers.setVisibility(View.VISIBLE);
+                                layoutNoConnexionFollowedOffers.setVisibility(View.GONE);
+                                svFollowedOffers.setVisibility(View.GONE);
+
+                            } else {
+                                layoutNoFollowedOffers.setVisibility(View.GONE);
+                                layoutNoConnexionFollowedOffers.setVisibility(View.GONE);
+                                svFollowedOffers.setVisibility(View.VISIBLE);
+                                LinearLayoutManager mLayoutManager = new LinearLayoutManager(getContext());
+                                rvFollowedOffers.setLayoutManager(mLayoutManager);
+                                followedOffersFragmentAdapter = new FollowedOffersFragmentAdapter(getContext(), followedOffers);
+                                rvFollowedOffers.setAdapter(followedOffersFragmentAdapter);
                             }
-                            LinearLayoutManager mLayoutManager = new LinearLayoutManager(getContext());
-                            rvFollowedOffers.setLayoutManager(mLayoutManager);
-                            followedOffersFragmentAdapter = new FollowedOffersFragmentAdapter(getContext() , followedOffers);
-                            rvFollowedOffers.setAdapter(followedOffersFragmentAdapter);
 
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
                     } else {
                         pbFollowedOffersFragment.setVisibility(View.GONE);
+                        layoutNoConnexionFollowedOffers.setVisibility(View.GONE);
+                        svFollowedOffers.setVisibility(View.GONE);
                         Log.e(" code suivi" , " code != 200");
 
 

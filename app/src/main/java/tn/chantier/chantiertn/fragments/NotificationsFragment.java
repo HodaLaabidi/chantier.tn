@@ -3,6 +3,7 @@ package tn.chantier.chantiertn.fragments;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,6 +12,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 
 import java.util.ArrayList;
 
@@ -21,6 +24,8 @@ import tn.chantier.chantiertn.adapters.MainHomeFragmentAdapter;
 import tn.chantier.chantiertn.adapters.NotificationsFragmentAdapter;
 import tn.chantier.chantiertn.factories.SharedPreferencesFactory;
 import tn.chantier.chantiertn.notifications.Notification;
+import tn.chantier.chantiertn.utils.ConnectivityService;
+import tn.chantier.chantiertn.widgets.UI.CustomToast;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -35,6 +40,7 @@ public class NotificationsFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private static final long WAITING_FOR_RESET_Connexion = 1000;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -43,8 +49,17 @@ public class NotificationsFragment extends Fragment {
     ArrayList<Notification> listNotifications ;
     @BindView(R.id.rv_notifications_fragment)
     RecyclerView rvNotificationsFragment;
-
+    @BindView(R.id.layout_no_notifications)
+    LinearLayout layoutNoNotifications ;
+    @BindView(R.id.list_notifications)
+    LinearLayout LayoutListNotifications ;
+    @BindView(R.id.layout_no_connexion_from_notification_fragment)
+    LinearLayout layoutNoConnexion ;
     private OnFragmentInteractionListener mListener;
+    @BindView(R.id.button_reset_connexion_notifications)
+    LinearLayout buttonResetConnexionNotifications ;
+    @BindView(R.id.progress_bar_notifications)
+    ProgressBar progressBar ;
 
     public NotificationsFragment() {
         // Required empty public constructor
@@ -90,22 +105,56 @@ public class NotificationsFragment extends Fragment {
     private void initialiseFragment() {
 
 
+        if (!ConnectivityService.isOnline(getContext())){
 
-        listNotifications = SharedPreferencesFactory.getListOfNotifications(getContext());
-        LinearLayoutManager mLayoutManager = new LinearLayoutManager(getContext());
-        rvNotificationsFragment.setLayoutManager(mLayoutManager);
-        if (listNotifications != null ) {
-            Log.e("test listNotification", listNotifications.size()+"!");
-            for (int i = 0 ; i < listNotifications.size(); i++){
-                Log.e("test listNotification", listNotifications.get(i).getContent()+"!");
-                Log.e("test listNotification", listNotifications.get(i).getDate()+"!");
-                Log.e("test listNotification", listNotifications.get(i).getTitle()+"!");
-                Log.e("test listNotification", listNotifications.get(i).getType()+"!");
+            layoutNoNotifications.setVisibility(View.GONE);
+            LayoutListNotifications.setVisibility(View.GONE);
+            layoutNoConnexion.setVisibility(View.VISIBLE);
+            progressBar.setVisibility(View.GONE);
+            buttonResetConnexionNotifications.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    progressBar.setVisibility(View.VISIBLE);
+                    layoutNoConnexion.setVisibility(View.GONE);
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
 
+                            initialiseFragment();
+                        }
+                    }, WAITING_FOR_RESET_Connexion);
+                }
+
+            });
+
+        } else {
+            progressBar.setVisibility(View.GONE);
+            layoutNoConnexion.setVisibility(View.GONE);
+            listNotifications = SharedPreferencesFactory.getListOfNotifications(getContext());
+            LinearLayoutManager mLayoutManager = new LinearLayoutManager(getContext());
+            rvNotificationsFragment.setLayoutManager(mLayoutManager);
+            if (listNotifications != null ) {
+                if (listNotifications.size() != 0) {
+                    layoutNoNotifications.setVisibility(View.GONE);
+                    LayoutListNotifications.setVisibility(View.VISIBLE);
+                    NotificationsFragmentAdapter notificationsFragmentAdapter = new NotificationsFragmentAdapter(getContext(), listNotifications);
+                    rvNotificationsFragment.setAdapter(notificationsFragmentAdapter);
+                } else {
+                    layoutNoNotifications.setVisibility(View.VISIBLE);
+                    LayoutListNotifications.setVisibility(View.GONE);
+
+                }
+            }  else {
+                layoutNoNotifications.setVisibility(View.VISIBLE);
+                LayoutListNotifications.setVisibility(View.GONE);
             }
-            NotificationsFragmentAdapter notificationsFragmentAdapter = new NotificationsFragmentAdapter(getContext(), listNotifications);
-            rvNotificationsFragment.setAdapter(notificationsFragmentAdapter);
+
         }
+
+
+
+
+
 
     }
 

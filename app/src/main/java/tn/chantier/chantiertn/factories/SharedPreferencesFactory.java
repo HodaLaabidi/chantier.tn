@@ -11,6 +11,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 import tn.chantier.chantiertn.models.City;
+import tn.chantier.chantiertn.models.EditableSubCategory;
 import tn.chantier.chantiertn.models.Professional;
 import tn.chantier.chantiertn.notifications.Notification;
 import tn.chantier.chantiertn.utils.Utils;
@@ -39,11 +40,24 @@ public static void initializedPreferences(Context context){
 
  }
 
+    public static Professional retrieveUserData(){
+        String json = pref.getString("user_session" , null);
+        if (json != null) {
+            Professional professionnal = gson.fromJson(json, Professional.class);
+            return professionnal;
+        } else {
+            return null ;
+        }
+    }
+
 static  public void storeUserEmailForConnexionField(String email){
 
     editor.putString("user_email" , email);
     editor.apply();
 
+ }
+ static public void removeUserEmail(){
+     pref.edit().remove("user_email").apply();
  }
 
  static public String retrieveUserEmail(){
@@ -57,17 +71,7 @@ static  public void storeUserEmailForConnexionField(String email){
 
  }
 
- public static Professional retrieveUserData(){
-    String json = pref.getString("user_session" , null);
-    if (json != null) {
-        Professional professionnal = gson.fromJson(json, Professional.class);
-        return professionnal;
-    } else {
-        return null ;
-    }
 
-
- }
 
     public static void saveListOfCodesCities(Context context , ArrayList<City> listCities){
         String json = gson.toJson(listCities) ;
@@ -93,13 +97,32 @@ static  public void storeUserEmailForConnexionField(String email){
     }
 
     public static  ArrayList<Notification> getListOfNotifications (Context context){
-            initializedPreferences(context);
-            String json = pref.getString("list_notification", null);
-            Type type = new TypeToken<ArrayList<Notification>>(){}.getType() ;
-            if (json != null)
+        initializedPreferences(context);
+        String json = pref.getString("list_notification", null);
+        Type type = new TypeToken<ArrayList<Notification>>(){}.getType() ;
+        if (json != null)
             return  gson.fromJson(json , type);
-            else
+        else
             return  new ArrayList<Notification>();
+
+
+    }
+    public static void saveSpecialities(Context context , ArrayList<EditableSubCategory> listOfSpecialities){
+
+        pref.edit().remove("list_specialities").apply();
+        String json = gson.toJson(listOfSpecialities) ;
+        editor.putString("list_specialities" , json);
+        editor.apply();
+    }
+
+    public static  ArrayList<EditableSubCategory> getListOfSpecialities (Context context){
+        initializedPreferences(context);
+        String json = pref.getString("list_specialities", null);
+        Type type = new TypeToken<ArrayList<EditableSubCategory>>(){}.getType() ;
+        if (json != null)
+            return  gson.fromJson(json , type);
+        else
+            return  new ArrayList<EditableSubCategory>();
 
 
     }

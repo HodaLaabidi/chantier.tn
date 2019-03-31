@@ -252,7 +252,7 @@
                             android:layout_gravity="center_horizontal"
                             android:layout_marginBottom="5dp"
                             android:gravity="center_horizontal"
-                            android:text="soit 83 DT HT / mois"
+                            android:text="soit 50 DT HT / mois"
                             android:textAllCaps="true"
                             android:textColor="@color/colorDarkGrey"
                             app:fonttype="semiBold" />
@@ -401,7 +401,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_horizontal"
                                 android:gravity="center_horizontal"
-                                android:text="Projets de sonstruction et rénovation exclus"
+                                android:text="Projets de construction et rénovation exclus"
                                 android:textColor="@color/colorDarkGrey"
                                 android:textSize="12sp"
                                 app:fonttype="light" />

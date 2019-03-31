@@ -1,5 +1,6 @@
 package tn.chantier.chantiertn.adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -56,7 +57,7 @@ public class MainHomeFragmentAdapter extends RecyclerView.Adapter<MainHomeFragme
     private static int cursor = 0;
     private Context context;
     private View probressBar;
-    private ArrayList<Offer> listOfOffers;
+    private ArrayList<Offer> listOfOffers = new ArrayList<Offer>();
     private boolean state = false;
     private static boolean isAd = false;
     private ArrayList<Ads> listOfAds = new ArrayList<>();
@@ -68,19 +69,27 @@ public class MainHomeFragmentAdapter extends RecyclerView.Adapter<MainHomeFragme
 
     public MainHomeFragmentAdapter(Context context, ArrayList<Offer> listOfOffers, View progressBar, ArrayList<Ads> listOfAds) {
         this.context = context;
+        this.listOfOffers = listOfOffers;
+
         if (listOfAds.size() != 0) {
             for (int i = 0; i < listOfOffers.size(); i++) {
-                if (i % 5 == 0) {
-                    listOfOffers.add(i, new Offer());
+                if (i % 5 == 0 && i != 0) {
+                    this.listOfOffers.add(i, new Offer());
                 }
             }
         } else {
+
+            for (int i = 0; i < listOfOffers.size(); i++) {
+                if (i % 5 == 0 && i != 0) {
+                    this.listOfOffers.add(i, new Offer());
+                }
+            }
             // static images for ads
             adsDrawable[1] = R.drawable.ads_gif;
-            adsDrawable[2] = R.drawable.img1;
-            adsDrawable[0] = R.drawable.logo;
+            adsDrawable[2] = R.drawable.ads_gif;
+            adsDrawable[0] = R.drawable.ads_gif;
         }
-        this.listOfOffers = listOfOffers;
+
         this.postParams = postParams;
         this.probressBar = progressBar;
         size = getItemCount() - 100;
@@ -97,12 +106,11 @@ public class MainHomeFragmentAdapter extends RecyclerView.Adapter<MainHomeFragme
 
         } else {
             item = LayoutInflater.from(context).inflate(R.layout.item_offer, parent, false);
-
-
         }
 
         return new MainHomeFragmentAdapter.MyViewHolder(item);
     }
+
 
     @Override
     public int getItemViewType(int position) {
@@ -117,6 +125,29 @@ public class MainHomeFragmentAdapter extends RecyclerView.Adapter<MainHomeFragme
             return CONTENT_TYPE;
 
         }
+    }
+
+
+
+    public void clearAdapter(){
+        listOfOffers.clear();
+        this.notifyDataSetChanged();
+
+    }
+
+    public void updateAdapter(ArrayList<Offer> listOfFilteredOffers){
+        Log.e("updateAdapter" , "Ok");
+        this.clearAdapter();
+        this.listOfOffers.clear();
+        Log.e("updateAdapter size lOF" , listOfOffers.size() + " !");
+        this.listOfOffers.addAll(listOfFilteredOffers);
+        Log.e("updateAdapter size lOF" , listOfOffers.size() + " !");
+        for (int i = 0; i < listOfFilteredOffers.size(); i++) {
+            if (i % 5 == 0 && i != 0) {
+                this.listOfOffers.add(i, new Offer());
+            }
+        }
+        this.notifyDataSetChanged();
     }
 
     @Override
@@ -160,16 +191,20 @@ public class MainHomeFragmentAdapter extends RecyclerView.Adapter<MainHomeFragme
             getLayout(holder, position);
         } else {
 
+
+
             // -------------------------------Dynamic method------------------------------------
-                    /* Ads ads = listOfAds.get(countAds);
+            if (listOfAds.size() != 0) {
+                Ads ads = listOfAds.get(countAds);
 
-                setAdsValues(ads, holder);
-                     count++;
-                     if ( countAds >= listOfAds.size() ){
-                         countAds = 0 ;
-                     }*/
+                setDynamicAdsValues(ads, holder);
+                countAds++;
+                if (countAds >= listOfAds.size()) {
+                    countAds = 0;
+                }
+            } else {
 
-            // -------------------------------Static method-------------------------------------
+                // -------------------------------Static method-------------------------------------
 
 
             int drawableAds = adsDrawable[countAds];
@@ -179,6 +214,7 @@ public class MainHomeFragmentAdapter extends RecyclerView.Adapter<MainHomeFragme
             countAds++;
             if (countAds >= 3) {
                 countAds = 0;
+            }
             }
         }
 
@@ -198,22 +234,42 @@ public class MainHomeFragmentAdapter extends RecyclerView.Adapter<MainHomeFragme
 
 
     private void setDynamicAdsValues(final Ads ads, MyViewHolder holder) {
-        if (ads.getEtat() == "1") {
-            String link = ads.getLink();
-            String redirectLink = ads.getRedirect_link();
+        if (ads.getEtat().equalsIgnoreCase("1")) {
+            String link = "https://"+ads.getLink();
+            final String redirectLink = ads.getRedirect_link();
+            Log.e( "link" , link);
+            Log.e( "redirectLink" , redirectLink);
             // TODO Don't miss to retrieve ads link and redirectLink and find method to load the image ( gif or jpg -_-)
-            if (ads.getLink().contains(".jpg")) {
-                holder.adsGif.setImageUrlWithoutBorderWithoutResizing(ads.getLink(), R.drawable.ads_gif);
-            } else if (ads.getLink().contains(".gif")) {
-                holder.adsGif.setGifImageUrl(ads.getLink() + "");
+            if (link.contains(".jpg") || link.contains(".jpeg") ||link.contains(".png")) {
+               // holder.adsGif.setImageUrlWithoutBorderWithoutResizing(ads.getLink());
+                Glide.with(context.getApplicationContext()).load(link).centerCrop().into(holder.adsGif);
+                holder.adsGif.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(context , AdsActivity.class);
+                        intent.putExtra("web_url", redirectLink);
+                        context.startActivity(intent);
+
+                    }
+                });
+            } else if (link.contains(".gif")  ) {
+                //holder.adsGif.setGifImageUrl(ads.getLink() + "");
+                Glide.with(context.getApplicationContext()).load(link).centerCrop().into(holder.adsGif);
+                holder.adsGif.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(context , AdsActivity.class);
+                        intent.putExtra("web_url", redirectLink);
+                        context.startActivity(intent);
+
+                    }
+                });
+            } else {
+                holder.adsGif.setGifImageUrl(link + "");
+                Log.e( "link" , ads.getLink()+ " !");
+
             }
-            holder.adsGif.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(context , AdsActivity.class);
-                    context.startActivity(intent);
-                }
-            });
+
         }
     }
 
@@ -285,6 +341,7 @@ public class MainHomeFragmentAdapter extends RecyclerView.Adapter<MainHomeFragme
                 bundle.putString("id_offer_item", offer.getId() + "");
                 intent.putExtras(bundle);
                 context.startActivity(intent);
+                ((Activity)  context).finish();
             }
         });
 

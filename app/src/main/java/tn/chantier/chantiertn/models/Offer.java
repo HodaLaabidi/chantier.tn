@@ -14,6 +14,7 @@ public class Offer implements Serializable {
     private String unite ;
     private String contact ;
     private int id_cli ;
+    private int check ;
     private String description ;
     private String info_supp;
     private String budget_min;
@@ -27,8 +28,9 @@ public class Offer implements Serializable {
     private String typeClient ;
 
 
-    public Offer(int id, String titre, int code_postal, int id_sec, int id_act, String echeance, String quantite, String unite, String contact, int id_cli, String description, String info_supp, String budget_min, String budget_max, String date_demande, String date_mod, String fichier, String appelle, String objet, String commission, String typeClient) {
+    public Offer(int id, String titre, int code_postal, int id_sec, int id_act, String echeance, String quantite, String unite, String contact, int id_cli, String description, String info_supp, String budget_min, String budget_max, String date_demande, String date_mod, String fichier, String appelle, String objet, String commission, String typeClient , int check) {
         this.id = id;
+        this.check = check ;
         this.titre = titre;
         this.code_postal = code_postal;
         this.id_sec = id_sec;
@@ -54,6 +56,15 @@ public class Offer implements Serializable {
     public void setId(int id) {
 
         this.id = id;
+    }
+
+
+    public int getCheck() {
+        return check;
+    }
+
+    public void setCheck(int check) {
+        this.check = check;
     }
 
     public void setId_cli(int id_cli) {

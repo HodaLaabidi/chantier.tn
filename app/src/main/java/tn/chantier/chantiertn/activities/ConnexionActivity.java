@@ -2,8 +2,10 @@ package tn.chantier.chantiertn.activities;
 
 import android.animation.Animator;
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.app.ActivityOptions;
 import android.content.Intent;
+import android.inputmethodservice.Keyboard;
 import android.os.Build;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -16,9 +18,11 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewAnimationUtils;
+import android.view.Window;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -26,6 +30,8 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
 import com.bumptech.glide.load.resource.UnitTransformation;
+import com.crashlytics.android.answers.Answers;
+import com.crashlytics.android.answers.LoginEvent;
 import com.dx.dxloadingbutton.lib.AnimationType;
 import com.dx.dxloadingbutton.lib.LoadingButton;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -50,6 +56,7 @@ import java.util.HashMap;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.fabric.sdk.android.Fabric;
 import io.rmiri.buttonloading.ButtonLoading;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
@@ -62,6 +69,7 @@ import tn.chantier.chantiertn.activities.classes.MyApplication;
 import tn.chantier.chantiertn.factories.RetrofitServiceFactory;
 import tn.chantier.chantiertn.factories.SharedPreferencesFactory;
 import tn.chantier.chantiertn.models.City;
+import tn.chantier.chantiertn.models.EditableSubCategory;
 import tn.chantier.chantiertn.models.Professional;
 import tn.chantier.chantiertn.utils.Utils;
 import tn.chantier.chantiertn.utils.textstyle.RalewayEditText;
@@ -131,6 +139,53 @@ public class ConnexionActivity extends AppCompatActivity {
         }
     }
 
+    private void getSpecialitiesItems() {
+
+        JsonObject postParams = new JsonObject();
+        postParams.addProperty("id_client" , professional.getId()+"");
+        Call<ResponseBody> call = RetrofitServiceFactory.getChantierService().getAllSelectedCategories(postParams);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.code() == 200){
+
+                    ArrayList<EditableSubCategory> specialities = new ArrayList<>();
+                    JSONArray jsonArray = null ;
+                    Gson gson = Utils.getGsonInstance();
+                    try {String remoteResponse = response.body().string()+"";
+                        jsonArray = new JSONArray(remoteResponse);
+                        Type type = new TypeToken<ArrayList<EditableSubCategory>>(){
+
+                        }.getType();
+                        specialities = gson.fromJson(jsonArray.toString(), type);
+                        SharedPreferencesFactory.saveSpecialities(getBaseContext(), specialities);
+                        Log.e("SP listSpecialities" ,SharedPreferencesFactory.getListOfSpecialities(getBaseContext()).size()+ "!" );
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+
+                } else {
+                    Log.e(" test EditableSS WS", response.code()+" !");
+                    try {
+                        Log.e(" test EditableSS WS", response.body().string()+" !");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
+    }
+
     private void startHomeActivity() {
 
 
@@ -166,6 +221,13 @@ public class ConnexionActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
+                InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+
+                View view2 = getCurrentFocus();
+                //If no view currently has focus, create a new one, just so we can grab a window token from it
+                if (view2 != null ) {
+                    imm.hideSoftInputFromWindow(view2.getWindowToken(), 0);
+                }
 
                 if ((etLoginConnexion.getText()+"").equalsIgnoreCase("")){
 
@@ -185,6 +247,7 @@ public class ConnexionActivity extends AppCompatActivity {
 
 
                 } else {
+
                     loadingButtonDXLB.startLoading();
                     connectToPlatform();
 
@@ -227,7 +290,6 @@ public class ConnexionActivity extends AppCompatActivity {
 
     private void connectToPlatform() {
 
-
         final JsonObject postParams = new JsonObject();
         postParams.addProperty("email" , etLoginConnexion.getText()+"");
         Log.e("ConnexionActivity" , etLoginConnexion.getText()+" !");
@@ -244,8 +306,17 @@ public class ConnexionActivity extends AppCompatActivity {
                 try {
                     JSONObject object = new JSONObject(response.body().string());
                     professional = gson.fromJson(object.toString() , Professional.class);
+                    professional.setPassword(etPasswordConnexion.getText()+"");
                     Log.e("ConnexionActivity" , object.toString()+" !");
                     loadingButtonDXLB.loadingSuccessful();
+
+                    //  --------for fabric events -----------
+                    Answers answers =  Utils.getAnswersInstance();
+                    answers.logLogin(new LoginEvent());
+                    answers.logLogin(new LoginEvent()
+                            .putMethod("Digits")
+                            .putSuccess(true));
+                    //  ----------END -----------------------
                     loadingButtonDXLB.setAnimationEndAction(new Function1<AnimationType, Unit>() {
                         @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
                         @Override
@@ -254,7 +325,9 @@ public class ConnexionActivity extends AppCompatActivity {
                             connectToFirebase();
                             saveCitiesCodes();
                             Log.e("ConnexionActivity" , professional.toString()+ " !");
+                            professional.setPassword(etPasswordConnexion.getText()+"");
                             SharedPreferencesFactory.storeUserSession(professional);
+                            //getSpecialitiesItems();
                             if (SharedPreferencesFactory.retrieveUserEmail() == null){
                                 SharedPreferencesFactory.storeUserEmailForConnexionField(professional.getEmail());
                             }
@@ -421,6 +494,10 @@ public class ConnexionActivity extends AppCompatActivity {
                             Type type = new TypeToken<ArrayList<City>>(){}.getType();
                             ArrayList<City> listCities = gson.fromJson(jsonArray.toString(), type);
                             Log.e("service code cities", listCities.size()+" !");
+                            Log.e("list of cities", " --------------------");
+                            for (int i = 0 ; i < listCities.size() ; i++){
+                              Log.e("listCities["+i+"]=", listCities.get(i).toString());
+                            }
                             for( int i = 0 ; i < listCities.size() ; i++){
                                 listCities.get(i).setLocalite(listCities.get(i).getLocalite().toLowerCase());
 

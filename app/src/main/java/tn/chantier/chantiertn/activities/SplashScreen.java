@@ -10,16 +10,35 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.crashlytics.android.answers.Answers;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.reflect.TypeToken;
 import com.stephentuso.welcome.WelcomeActivity;
 import com.stephentuso.welcome.WelcomeHelper;
 
+import io.fabric.sdk.android.Fabric;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import tn.chantier.chantiertn.R;
+import tn.chantier.chantiertn.activities.classes.MyApplication;
 import tn.chantier.chantiertn.activities.classes.WelcomeScreen;
+import tn.chantier.chantiertn.factories.RetrofitServiceFactory;
 import tn.chantier.chantiertn.factories.SharedPreferencesFactory;
+import tn.chantier.chantiertn.models.Ads;
+import tn.chantier.chantiertn.models.EditableSubCategory;
 import tn.chantier.chantiertn.notifications.MyFirebaseMessaging;
 import tn.chantier.chantiertn.notifications.Notification;
 import tn.chantier.chantiertn.utils.Utils;
@@ -30,6 +49,9 @@ public class SplashScreen extends AppCompatActivity{
 
     private static int SPLASH_TIME_OUT = 5000;
     private static ArrayList<Notification> listNotifications = new ArrayList<>();
+    public  static boolean firstInstallation  ;
+    public static ArrayList<Ads> listOfAds = new ArrayList<>();
+
 
 
     @BindView(R.id.text_splash_screen)
@@ -45,9 +67,12 @@ public class SplashScreen extends AppCompatActivity{
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Fabric.with(this, new Answers());
         setContentView(R.layout.activity_splash_screen);
         ButterKnife.bind(this);
-        boolean firstInstallation = UtilsSharefPreferences.getSplashScreenState(getBaseContext());
+        getAdsListFromBackEnd();
+        firstInstallation = UtilsSharefPreferences.getSplashScreenState(getBaseContext());
+
 
         // test data payload from firebase console ( data payload + notification )
 
@@ -154,6 +179,51 @@ public class SplashScreen extends AppCompatActivity{
 
 
 
+    }
+
+
+
+    private void getAdsListFromBackEnd() {
+        Call<ResponseBody> call = RetrofitServiceFactory.getChantierService().getAds();
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+                if ( response.isSuccessful()){
+                    Log.e("test array of ads", " response  successful");
+                } else {
+                    Log.e("test array of ads", " response  failed");
+                }
+                if ( response.code() == 200){
+                    try {
+                        //JSONObject jsonObject= null;
+                        String remoteResponse= response.body().string();
+                        //Log.e("test array of ads", remoteResponse);
+                        Gson gson = Utils.getGsonInstance();
+                        //JSONObject jsonObject = new JSONObject(remoteResponse);
+                        JSONArray jarray = new JSONArray(remoteResponse);
+                        for (int i = 0; i < jarray.length(); i++)
+                        {
+                            JSONObject jsonObj = jarray.getJSONObject(i);
+
+                            Log.e("json object "+i, jsonObj.toString());
+                        }
+                        Type type = new TypeToken<ArrayList<Ads>>() {
+                        }.getType();
+                        listOfAds  = gson.fromJson(jarray.toString(), type);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
     }
 
     private void animateSplashScreen() {

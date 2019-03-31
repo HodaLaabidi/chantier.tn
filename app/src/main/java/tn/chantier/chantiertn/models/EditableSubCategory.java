@@ -7,10 +7,22 @@ public class EditableSubCategory implements Serializable {
     private String id;
     private String nom_activite;
     private String id_act;
+    private String id_sec ;
+
+
+    public String getId_sec() {
+        return id_sec;
+    }
+
+    public void setId_sec(String id_sec) {
+        this.id_sec = id_sec;
+    }
+
+
 
     @Override
     public String toString() {
-        return id + " "+ nom_activite + " "+ id_act ;
+        return id + " "+ nom_activite + " "+ id_act  + " "+ id_sec;
     }
 
     public String getId() {
@@ -37,10 +49,14 @@ public class EditableSubCategory implements Serializable {
         this.id_act = id_act;
     }
 
-    public EditableSubCategory(String id, String nom_activite, String id_act) {
+    public EditableSubCategory(String id, String nom_activite, String id_act , String id_sec) {
 
         this.id = id;
         this.nom_activite = nom_activite;
         this.id_act = id_act;
+        this.id_sec = id_sec;
+    }
+    public EditableSubCategory() {
+
     }
 }

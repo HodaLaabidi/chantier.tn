@@ -15,10 +15,6 @@
             android:icon="@drawable/edit_category"
             />
         <item
-            android:id="@+id/item_notification"
-            android:title="Notifications"
-            android:icon="@drawable/ic_notifications_black"/>
-        <item
             android:icon="@drawable/pack"
             android:id="@+id/item_pack"
             android:title="Pack d'abonnements" />

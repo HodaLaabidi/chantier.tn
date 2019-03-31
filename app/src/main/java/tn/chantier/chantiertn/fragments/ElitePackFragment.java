@@ -106,6 +106,7 @@ public class ElitePackFragment extends android.support.v4.app.Fragment {
             public void onClick(View v) {
                 JsonObject postPArams = new JsonObject();
                 postPArams.addProperty("pack","elite" );
+                postPArams.addProperty("id_client",SharedPreferencesFactory.retrieveUserData().getId() );
                 Call<ResponseBody> call = RetrofitServiceFactory.getChantierService().sendPackRequest(postPArams);
                 call.enqueue(new Callback<ResponseBody>() {
                     @Override

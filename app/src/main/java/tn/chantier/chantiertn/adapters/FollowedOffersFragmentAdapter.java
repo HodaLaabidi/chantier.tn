@@ -1,12 +1,14 @@
 package tn.chantier.chantiertn.adapters;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.widget.RecyclerView;
@@ -19,6 +21,7 @@ import android.widget.LinearLayout;
 import java.util.ArrayList;
 
 import tn.chantier.chantiertn.R;
+import tn.chantier.chantiertn.activities.DetailsActivity;
 import tn.chantier.chantiertn.models.FollowedOffer;
 import tn.chantier.chantiertn.utils.Utils;
 import tn.chantier.chantiertn.utils.textstyle.RalewayTextView;
@@ -79,25 +82,6 @@ public class FollowedOffersFragmentAdapter extends RecyclerView.Adapter<Followed
             holder.date.setText("non mentionné ");
         }
 
-        /*itemDetailLayoutMail.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_SENDTO);
-                intent.setData(Uri.parse("mailto:"));
-                startActivity(intent);
-
-            }
-        });
-        itemIconCall.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (hasPermissions(getContext(), Utils.MY_PERMISSIONS_REQUEST_CALL_PHONE , Utils.PERMISSIONS)) {
-                    Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:"+followedOffers.get()+""));
-                    startActivity(intent);
-                }
-            }
-        });
-        */
 
         holder.itemIconCall.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -157,6 +141,20 @@ public class FollowedOffersFragmentAdapter extends RecyclerView.Adapter<Followed
         });
 
 
+        holder.goToFollowedOfferDetail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent (context , DetailsActivity.class);
+                Bundle extras = new Bundle();
+                extras.putString("id_offer_item" , followedOffer.getId());
+                extras.putString("from_followed_offers_list" , "yes");
+                intent.putExtras(extras);
+                context.startActivity(intent);
+                ((Activity)  context).finish();
+            }
+        });
+
+
     }
 
     @Override
@@ -173,6 +171,7 @@ public class FollowedOffersFragmentAdapter extends RecyclerView.Adapter<Followed
         RalewayTextView owner = itemView.findViewById(R.id.item_followed_offer_owner);
         RalewayTextView phoneNumber = itemView.findViewById(R.id.item_followed_offer_phone_number);
         RalewayTextView date = itemView.findViewById(R.id.item_followed_offer_date);
+        LinearLayout goToFollowedOfferDetail = itemView.findViewById(R.id.ll_go_to_followed_offer_detail);
         public MyViewHolder(View itemView) {
             super(itemView);
         }

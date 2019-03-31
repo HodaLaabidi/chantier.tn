@@ -36,6 +36,7 @@ import tn.chantier.chantiertn.R;
 import tn.chantier.chantiertn.factories.RetrofitBrowseContactServiceFactory;
 import tn.chantier.chantiertn.factories.RetrofitServiceFactory;
 import tn.chantier.chantiertn.factories.SharedPreferencesFactory;
+import tn.chantier.chantiertn.fragments.ActivityLogFragment;
 import tn.chantier.chantiertn.fragments.HomeFragment;
 import tn.chantier.chantiertn.models.Applicant;
 import tn.chantier.chantiertn.models.Offer;
@@ -85,6 +86,9 @@ public class DetailsActivity extends AppCompatActivity {
     ImageView  itemDetailOfferIcon ;
     @BindView(R.id.icon_commission_details)
     ImageView itemCommissionDetails;
+    Intent intent;
+    Bundle bundle = new Bundle();
+    String fromFOList = "";
 
 
 
@@ -112,6 +116,27 @@ public class DetailsActivity extends AppCompatActivity {
 
     }
 
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        if (fromFOList.equals("yes")) {
+            Log.e("from_followedofferslist", "yes");
+            intent = new Intent(DetailsActivity.this, HomeActivity.class);
+
+            bundle.putString("from_detail_activity", "ok");
+            intent.putExtras(bundle);
+            startActivity(intent);
+            finish();
+        } else {
+            Log.e("from_followedofferslist", "no");
+            intent = new Intent(DetailsActivity.this, HomeActivity.class);
+            bundle.putString("from_detail_activity", "no");
+            intent.putExtras(bundle);
+            startActivity(intent);
+            finish();
+        }
+    }
 
     private void retriveDataFromBackOffice() {
         layoutDetails.setVisibility(View.GONE);
@@ -181,15 +206,27 @@ public class DetailsActivity extends AppCompatActivity {
             //  set contact layouts fonctionnalities
 
             setContactLayoutsValues();
-            itemDetailLayoutBrowseContact.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    itemDetailLayoutBrowseContact.setVisibility(View.GONE);
-                    itemDetailContact.setVisibility(View.VISIBLE);
+
+            if (offer.getCheck() == 1){
+                itemDetailLayoutBrowseContact.setVisibility(View.GONE);
+                itemDetailContact.setVisibility(View.VISIBLE);
+            }
+            if (offer.getCheck() == 0){
+
+                itemDetailLayoutBrowseContact.setVisibility(View.VISIBLE);
+                itemDetailContact.setVisibility(View.GONE);
+                itemDetailLayoutBrowseContact.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        itemDetailLayoutBrowseContact.setVisibility(View.GONE);
+                        itemDetailContact.setVisibility(View.VISIBLE);
 
 
-                }
-            });
+                    }
+                });
+
+            }
+
 
             setIcons();
 
@@ -408,17 +445,41 @@ public class DetailsActivity extends AppCompatActivity {
     private void initialiseViews() {
         ButterKnife.bind(this );
 
-        id = getIntent().getExtras().getString("id_offer_item");
-        Log.e("id offer details", id );
+        if (getIntent() != null) {
+            final Bundle extras = getIntent().getExtras();
+            fromFOList = extras.getString("from_followed_offers_list");
+            Log.e("fromFollowedOffers_list", fromFOList);
 
-        llArrowButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent  = new Intent( DetailsActivity.this , HomeActivity.class );
-                startActivity(intent);
-                finish();
-            }
-        });
+            id = extras.getString("id_offer_item");
+            Log.e("id offer details", id);
+
+
+            llArrowButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                        if (fromFOList.equals("yes")) {
+                            Log.e("from_followedofferslist", "yes");
+                            intent = new Intent(DetailsActivity.this, HomeActivity.class);
+
+                            bundle.putString("from_detail_activity", "ok");
+                            intent.putExtras(bundle);
+                            startActivity(intent);
+                            finish();
+                        } else {
+                            Log.e("from_followedofferslist", "no");
+                            intent = new Intent(DetailsActivity.this, HomeActivity.class);
+                            bundle.putString("from_detail_activity", "no");
+                            intent.putExtras(bundle);
+                            startActivity(intent);
+                            finish();
+                        }
+
+
+
+                }
+            });
+        }
     }
 
 }

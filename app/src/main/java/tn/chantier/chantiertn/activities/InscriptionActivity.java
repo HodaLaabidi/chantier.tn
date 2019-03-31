@@ -16,6 +16,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 import org.json.JSONException;
@@ -91,8 +92,8 @@ public class InscriptionActivity extends AppCompatActivity {
         });
         Utils.hideKeyboard((AppCompatActivity) MyApplication.getAppContext());
         // just for test to avoid executing the service of inscription
-        //inscriptionProcess();
-        noServiceJustForTest();
+        inscriptionProcess();
+       // noServiceJustForTest();
     }
     // plz don't forget just for test -_-
 
@@ -169,40 +170,46 @@ public class InscriptionActivity extends AppCompatActivity {
                         postParams.addProperty("confirmPassword", etPassword.getText() + "");
                         postParams.addProperty("raison_social", etSociatyName.getText() + "");
                         Call<ResponseBody> call = RetrofitServiceFactory.getChantierService().inscriptionChantierService(postParams);
-                        Intent intent = new Intent(getBaseContext(), CategoriesActivity.class);
-                        startActivity(intent);
-                        finish();
 
-/*
+
+
                         call.enqueue(new Callback<ResponseBody>() {
                             @Override
                             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                                String  remoteResponse = null;
+
+                                try {
+                                    remoteResponse = response.body().string();
                                 if (response.code() == 200) {
 
                                 // done !
-                                    Log.e("register", postParams.toString() + response.toString());
-                                      Intent intent = new Intent(InscriptionActivity.this, CategoriesActivity.class);
-                                      startActivity(intent);
-                                      finish();
+                                        Log.e("register", remoteResponse);
+                                    Gson gson = Utils.getGsonInstance();
+                                    JSONObject object = new JSONObject(response.body().string());
+                                    String idClient = object.getString("id_client");
+                                        Intent intent = new Intent(InscriptionActivity.this, CategoriesActivity.class);
+                                        intent.putExtra("id_new_client" , idClient);
+                                        startActivity(intent);
+                                        finish();
+
+
 
                                 } else if (response.code() == 201) {
                                     //  existing user
-                                    Log.e(TAG_ACTIVITY, response.toString() + " !");
                                     int typeOfError = 0;
+                                    Log.e("typeOfError = 0" , remoteResponse+"");
                                     try {
 
-                                        JSONObject object = new JSONObject(response.body().string());
+                                        JSONObject object = new JSONObject(remoteResponse);
                                         typeOfError = object.getInt("existant");
                                     } catch (JSONException e) {
                                         e.printStackTrace();
-                                    } catch (IOException e) {
-                                        e.printStackTrace();
                                     }
-                                    if (typeOfError == img2) {
+                                    if (typeOfError == 2) {
                                         new CustomToast(InscriptionActivity.this, getResources().getString(R.string.error), getResources().getString(R.string.existing_user_email), R.drawable.ic_erreur, CustomToast.ERROR).show();
 
 
-                                    } else if (typeOfError == img1) {
+                                    } else if (typeOfError == 1) {
                                         new CustomToast(InscriptionActivity.this, getResources().getString(R.string.error), getResources().getString(R.string.existing_user_phone_number), R.drawable.ic_erreur, CustomToast.ERROR).show();
 
 
@@ -213,6 +220,11 @@ public class InscriptionActivity extends AppCompatActivity {
                                     new CustomToast(InscriptionActivity.this, getResources().getString(R.string.error), getResources().getString(R.string.technical_error_alert), R.drawable.ic_erreur, CustomToast.ERROR).show();
 
                                 }
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
                             }
 
                             @Override
@@ -222,7 +234,7 @@ public class InscriptionActivity extends AppCompatActivity {
                                 new CustomToast(getBaseContext(), getResources().getString(R.string.error), getResources().getString(R.string.technical_error_alert), R.drawable.ic_erreur, CustomToast.ERROR).show();
                             }
                         });
-*/
+
                        }
                      }
                    }

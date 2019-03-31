@@ -9,7 +9,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="text_qual">Qualification</string>
-    <string name="des_qual">Un de nos conseillers l\'appelle pour détailler et formuler une demande d'achat claire .</string>
+    <string name="des_qual">Un de nos conseillers l\'appelle pour détailler et formuler une demande d\'achat claire .</string>
     <string name="text_signal">signal</string>
     <string name="des_signal">L\'acheteur dépose sa demande d\'achat en quelques minutes sur Chantier.tn .\</string>
     <string name="text_consultation">consultation</string>
@@ -106,7 +106,7 @@
     <string name="no_phone_number">Le demandeur n\'a pas mentionné son numéro de téléphone !</string>
     <string name="text_splash_screen_under_logo_1">VOUS MET EN RELATION AVEC</string>
     <string name="text_splash_screen_under_logo_2">Vos futurs clients</string>
-    <string name="pack_duration">soit 83DT HT / Mois</string>
+    <string name="pack_duration">soit 100 DT HT / Mois</string>
     <string name="asset_statements" translatable="false">[{ \"include\": \"https://mail.google.com/.well-known/assetlinks.json\" }]</string>
     <string name="Warning">Le nombre des sous-secteurs choisis ne doit pas dépasser le 20 !</string>
     <string name="default_notification_channel_id">my_channel_01</string>
@@ -115,4 +115,6 @@
     <string name="msg_subscribe_failed">subscribe failed</string>
     <string name="ads">Publicité</string>
     <string name="incorrect_email_or_password">L\' email ou/ et le mot de passe sont incorrects</string>
+    <string name="label_spacialities">Spécialités</string>
+    <string name="no_type_filter">SVP Choisissez Type(s) demandeur !</string>
 </resources>
