@@ -207,5 +207,36 @@
             android:layout_height="wrap_content" />
 
     </LinearLayout>
+    <LinearLayout
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp"
+        android:background="@color/lightGray"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:background="@color/colorWhite"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <tn.chantier.chantiertn.utils.textstyle.RalewayTextView
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="15dp"
+            android:layout_width="0dp"
+            android:layout_weight="15"
+            android:textColor="@color/colorBlack"
+            android:textSize="14dp"
+            android:text="Revêtement sol en moquette PVC"
+            android:layout_height="wrap_content" />
+
+        <android.support.v7.widget.AppCompatCheckBox
+            android:layout_weight="1"
+            android:id="@+id/checkbox_revetement_moquete_PVC"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
 
 </LinearLayout>

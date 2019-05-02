@@ -1,6 +1,8 @@
 package tn.chantier.chantiertn.adapters;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -12,6 +14,9 @@ import android.widget.ImageView;
 import java.util.ArrayList;
 
 import tn.chantier.chantiertn.R;
+import tn.chantier.chantiertn.activities.ContactDetailsActivity;
+import tn.chantier.chantiertn.activities.HomeActivity;
+import tn.chantier.chantiertn.fragments.HomeFragment;
 import tn.chantier.chantiertn.notifications.Notification;
 import tn.chantier.chantiertn.utils.Utils;
 import tn.chantier.chantiertn.utils.textstyle.RalewayTextView;
@@ -53,11 +58,29 @@ public class NotificationsFragmentAdapter extends RecyclerView.Adapter<Notificat
               if (notification.getType().equalsIgnoreCase("1")){
                   holder.imageNotification.setImageResource(R.drawable.message);
               }
-              else if (notification.getType().equalsIgnoreCase("2")){
-                  holder.imageNotification.setImageResource(R.drawable.valid_offer);
-              }
               else if (notification.getType().equalsIgnoreCase("3")){
                   holder.imageNotification.setImageResource(R.drawable.expiration_compte);
+              }
+              else if (notification.getId_lead() != null){
+                  if (!notification.getId_lead().equalsIgnoreCase("")){
+
+                          holder.imageNotification.setImageResource(R.drawable.valid_offer);
+                          holder.itemView.setOnClickListener(new View.OnClickListener() {
+                              @Override
+                              public void onClick(View v) {
+                          Intent intent = new Intent(context, ContactDetailsActivity.class);
+                          Bundle bundle = new Bundle();
+                          bundle.putString("id_offer_item" , notification.getId_lead());
+                          Bundle bundle1 = new Bundle();
+                          bundle1.putString("from_notifications_adapter" , "yes");
+                          intent.putExtras(bundle);
+                          intent.putExtras(bundle1);
+                          context.startActivity(intent);
+
+                              }
+                          });
+
+                  }
               }
           }
         }

@@ -280,6 +280,8 @@ public class CategoriesActivity extends AppCompatActivity{
     CheckBox checkBoxRevetementSolResine ;
     @BindView(R.id.checkbox_revetement_sol_beton_cire)
     CheckBox checkBoxRevetementSolBetonCire ;
+    @BindView(R.id.checkbox_revetement_moquete_PVC)
+    CheckBox checkBoxRevetementMoquettePVC ;
 
 
 
@@ -762,6 +764,7 @@ public class CategoriesActivity extends AppCompatActivity{
         changeCheckboxColor(checkBoxRevetementSolParquet);
         changeCheckboxColor(checkBoxRevetementSolResine);
         changeCheckboxColor(checkBoxRevetementSolBetonCire);
+        changeCheckboxColor(checkBoxRevetementMoquettePVC);
                     // -----------------------------------------------------------------------
 
         // Alarme er sécurité
@@ -881,6 +884,7 @@ public class CategoriesActivity extends AppCompatActivity{
         checkBoxes.add(new SubCategory("15",checkBoxRevetementSolParquet));
         checkBoxes.add(new SubCategory("89",checkBoxRevetementSolResine));
         checkBoxes.add(new SubCategory("13",checkBoxRevetementSolBetonCire));
+        checkBoxes.add(new SubCategory("115", checkBoxRevetementMoquettePVC));
 
 
     }

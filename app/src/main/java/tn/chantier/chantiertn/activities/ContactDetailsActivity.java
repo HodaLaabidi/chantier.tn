@@ -1,12 +1,17 @@
 package tn.chantier.chantiertn.activities;
 
+import android.app.AlertDialog;
 import android.app.Application;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -94,6 +99,7 @@ public class ContactDetailsActivity extends AppCompatActivity {
 
     String id ;
     private static Offer offer ;
+    String fromFOList = "", fromNotificationsAdapter ="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -125,6 +131,7 @@ public class ContactDetailsActivity extends AppCompatActivity {
                         try {
                             jsonObject = new JSONObject(response.body().string());
                             offer = gson.fromJson(jsonObject.toString(), Offer.class);
+                            Log.e("offer" , offer.toString());
                             setAllViews(offer);
 
                         }catch (JSONException e){
@@ -133,7 +140,10 @@ public class ContactDetailsActivity extends AppCompatActivity {
                      catch (IOException e) {
                         e.printStackTrace();
                     }
-                    } else {
+                    } if ( response.code() == 203 ){
+                        // code non suivi
+
+                    }else {
                         probgressBarDetailsItem.setVisibility(View.GONE);
                     }
                 }
@@ -162,6 +172,32 @@ public class ContactDetailsActivity extends AppCompatActivity {
             itemOfferQuantity.setText(offer.getQuantite());
             itemOfferUnit.setText(offer.getUnite());
             itemDetailDescription.setText(offer.getDescription());
+            if (fromFOList != null){
+                if (fromFOList.equalsIgnoreCase("yes")  ){
+                    itemDetailLayoutBrowseContact.setVisibility(View.GONE);
+                    contactProgressBar.setVisibility(View.VISIBLE);
+                    setContactLayoutsValues();
+                }
+            }
+            Log.e("fromNotificationsAdapter", fromNotificationsAdapter + "!!");
+            if (fromNotificationsAdapter != null){
+
+                if (fromNotificationsAdapter != ""){
+                    if ( fromNotificationsAdapter.equalsIgnoreCase("yes")  ){
+                        Log.e("fromNotificationsAdapter" , fromNotificationsAdapter + "!");
+                        itemDetailLayoutBrowseContact.setVisibility(View.GONE);
+                        contactProgressBar.setVisibility(View.VISIBLE);
+                        setContactLayoutsValues();
+                    }
+                } else {
+                    Log.e("notif" , "fromNotificationsAdapter = ''");
+            }
+            } else {
+                Log.e("notif" , "fromNotificationsAdapter = null ");
+
+            }
+
+
 
             //  set contact layouts fonctionnalities
 
@@ -185,6 +221,31 @@ public class ContactDetailsActivity extends AppCompatActivity {
 
 
         }
+
+
+    }
+
+
+    private void showDeniedAccessToContact(){
+        final LayoutInflater inflater = LayoutInflater.from(ContactDetailsActivity.this);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(ContactDetailsActivity.this, R.style.AppCompatAlertDialogStyleSuggest);
+        final View customDialog = inflater.inflate(R.layout.pop_up_denied_access_contact, null , false);
+        final AlertDialog alertDialog = builder.create();
+        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        alertDialog.setView(customDialog);
+        alertDialog.show();
+        LinearLayout buttondemandPack = customDialog.findViewById(R.id.button_demand_pack);
+        buttondemandPack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.dismiss();
+                Intent intent = new Intent( ContactDetailsActivity.this , PackActivity.class);
+                startActivity(intent);
+
+
+
+            }
+        });
 
 
     }
@@ -353,17 +414,17 @@ public class ContactDetailsActivity extends AppCompatActivity {
                         }
 
 
-                    } else {
+                    } else if (response.code() == 203) {
+                        Log.e("response.code = : " ,response.toString() + response.code() + " !");
                         contactProgressBar.setVisibility(View.GONE);
-                        {
-                            try {
-                                Log.e( "Retrofit Response: " ,response.errorBody().string());
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-                            Log.e( "Error message: " , response.raw().message());
-                            Log.e("Error code: " , String.valueOf(response.raw().code()));
-                        }
+                        itemDetailLayoutBrowseContact.setVisibility(View.VISIBLE);
+                        showDeniedAccessToContact();
+                    }else
+                     {
+                        contactProgressBar.setVisibility(View.GONE);
+
+                            Log.e("Errorcode: " ,response.toString() + response.code() + " !");
+
                     }
                 }
 
@@ -425,17 +486,89 @@ public class ContactDetailsActivity extends AppCompatActivity {
     private void initialiseViews() {
 
         ButterKnife.bind(this);
-        id = getIntent().getExtras().getString("id_offer_item");
+        if (getIntent() != null) {
+            final Bundle extras = getIntent().getExtras();
+            fromFOList = extras.getString("from_followed_offers_list");
+            Log.e("fromFollowedOffers_list", fromFOList+"!");
+            Bundle extras2 = getIntent().getExtras();
+            fromNotificationsAdapter = extras2.getString("from_notifications_adapter");
+            Log.e("fromNotificationsAdapter" , fromNotificationsAdapter + "!!!");
 
-        Log.e("id offer details" , id);
+            id = extras.getString("id_offer_item");
+            Log.e("id offer details", id);
 
-        llArrowButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ContactDetailsActivity.this , HomeActivity.class);
-                startActivity(intent);
+
+            llArrowButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Bundle bundle = new Bundle() ;
+                    if (fromNotificationsAdapter != null){
+                        if (fromNotificationsAdapter.equalsIgnoreCase("yes")){
+                            finish();
+                        }
+                    }
+                     else if (fromFOList != null){
+                        {
+                            if (fromFOList.equals("yes")) {
+                                Log.e("from_followedofferslist", "yes");
+                                Intent intent = new Intent(ContactDetailsActivity.this, HomeActivity.class);
+
+                                bundle.putString("from_detail_activity", "ok");
+                                intent.putExtras(bundle);
+                                startActivity(intent);
+                                finish();
+                            } else if (fromFOList != ""){
+                                Log.e("from_followedofferslist", "no");
+                                Intent intent = new Intent(ContactDetailsActivity.this, HomeActivity.class);
+                                bundle.putString("from_detail_activity", "no");
+                                intent.putExtras(bundle);
+                                startActivity(intent);
+                                finish();
+                            }
+                        }
+
+                    }
+
+
+
+
+
+
+                }
+            });
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        if (fromNotificationsAdapter != null){
+
+            if (fromNotificationsAdapter.equalsIgnoreCase("yes")) {
                 finish();
             }
-        });
+        } else {
+            if (fromFOList != null){
+                if (fromFOList.equals("yes")) {
+                    Log.e("from_followedofferslist", "yes");
+                    Intent intent = new Intent(ContactDetailsActivity.this, HomeActivity.class);
+
+                    Bundle bundle = new Bundle();
+                    bundle.putString("from_detail_activity", "ok");
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                    finish();
+                } else {
+                    Log.e("from_followedofferslist", "no");
+                    Bundle bundle = new Bundle();
+                    Intent intent = new Intent(ContactDetailsActivity.this, HomeActivity.class);
+                    bundle.putString("from_detail_activity", "no");
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                    finish();
+                }
+            }
+        }
     }
+
 }

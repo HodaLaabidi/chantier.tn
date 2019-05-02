@@ -117,18 +117,24 @@ public class MyFirebaseMessaging extends FirebaseMessagingService {
         } else {
             date = System.currentTimeMillis()+"";
             String channelId = getString(R.string.default_notification_channel_id);
-            String title ="" , content ="" , type;
+            String title ="" , content ="" , type= "" , id_lead = "";
             if ( remoteMessage.getData().size() > 0) {
                 Map<String, String> getData = remoteMessage.getData();
                 title = getData.get("title");
                 content = getData.get("content");
                 type = getData.get("type");
-                Log.e("data notification" , title + " "+ content + " "+ type +" ");
+                id_lead = getData.get("id_lead");
+                Log.e("data notification" , title + " "+ content + " "+ type +" "+ id_lead);
 
                 if (title != null && content != null && type != null) {
                     isNotification = true ;
+                    Log.e("notif" , title + content + type + id_lead);
                     listNotifications = SharedPreferencesFactory.getListOfNotifications(getBaseContext());
-                    listNotifications.add(0,new Notification(title, content, date, type));
+                    if (id_lead == null){
+                        listNotifications.add(0,new Notification(title, content, date, type));
+                    } else {
+                        listNotifications.add(0,new Notification(title, content, date, type, id_lead));
+                    }
                     SharedPreferencesFactory.saveNotifications(getBaseContext(), listNotifications);
                     Utils.isNotification = true ;
 

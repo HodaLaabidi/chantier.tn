@@ -379,7 +379,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="left"
                                 android:gravity="left"
-                                android:text="Projets de sonstruction et rénovation inclus"
+                                android:text="Projets de construction et rénovation inclus"
                                 android:textColor="@color/colorDarkGrey"
                                 app:fonttype="light" />
                         </LinearLayout>

@@ -80,4 +80,12 @@ public interface ChantierServices {
     Call<ResponseBody> getFiltredOffers(@Body JsonObject requestObject) ;
 
 
+    @GET("subscribe")
+    Call<ResponseBody>   subscribe(@Query("id_client") String id);
+
+
+    @POST("unsubscribe")
+    Call<ResponseBody>   unsubscribe(@Body JsonObject requestObject);
+
+
 }

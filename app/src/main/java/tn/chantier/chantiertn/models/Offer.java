@@ -166,7 +166,44 @@ public class Offer implements Serializable {
 
     @Override
     public String toString() {
-        return getContact() + getDate_demande() + getDescription() + getBudget_max() + getTitre() + getCommission() + " ";
+       /* private int id ;
+        private String titre ;
+        private int code_postal ;
+        private int id_sec ;
+        private int id_act ;
+        private String echeance;
+        private String quantite ;
+        private String unite ;
+        private String contact ;
+        private int id_cli ;
+        private int check ;
+        private String description ;
+        private String info_supp;
+        private String budget_min;
+        private String budget_max ;
+        private String date_demande ;
+        private String date_mod ;
+        private String fichier ;
+        private String appelle ;
+        private String objet ;
+        private String commission ;
+        private String typeClient ;*/
+        return  " id "+id+ " titre "+titre+" code_postal "+code_postal+ " id_sec "+id_sec+ " id_act "+id_act+" "+" echeance "+ echeance +" "+ "quantite "
+                + quantite +" "+ "contact "+ contact +" "
+                + "id_cli "+ id_cli +" "
+                + "check "+ check +" "
+                + "description "+ description +" "
+                + "info_supp "+ info_supp +" "
+                + "budget_min "+ budget_min +" "
+                + "budget_max "+ budget_max +" "
+                + "date_demande "+ date_demande +" "
+                + "date_mod "+ date_mod +" "
+                + "fichier "+ fichier +" "
+                + "appelle "+ appelle +" "
+                + "objet "+ objet +" "
+                + "commission "+ commission +" "
+                + "typeClient "+ typeClient +" "
+               ;
     }
 
     public void setTitre(String titre) {
@@ -257,4 +294,5 @@ public class Offer implements Serializable {
     public Offer() {
 
     }
+
 }

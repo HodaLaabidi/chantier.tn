@@ -338,10 +338,13 @@ public class MainHomeFragmentAdapter extends RecyclerView.Adapter<MainHomeFragme
             public void onClick(View v) {
                 Intent intent = new Intent(context, ContactDetailsActivity.class);
                 Bundle bundle = new Bundle();
+                Bundle bundle1 = new Bundle() ;
+                bundle1.putString("from_followed_offers_list" , "no");
                 bundle.putString("id_offer_item", offer.getId() + "");
                 intent.putExtras(bundle);
+                intent.putExtras(bundle1);
                 context.startActivity(intent);
-                ((Activity)  context).finish();
+
             }
         });
 

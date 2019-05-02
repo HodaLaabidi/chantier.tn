@@ -106,14 +106,14 @@ public class HomeActivity extends AppCompatActivity
 
         initialiseViewsNdValues();
 
-        createFirebaseTopics();
+        //createFirebaseTopics();
 
 
     }
 
     private void sendFirebaseTokenToBackEnd(){
 
-        firebaseSubscription(getBaseContext());
+           // firebaseSubscription(getBaseContext());
         if (refreshedToken != null) {
             JsonObject postParams = new JsonObject();
             postParams.addProperty("id_client",professional.getId());
@@ -126,8 +126,10 @@ public class HomeActivity extends AppCompatActivity
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     try {
                         if (response.body().string() == "Successfully created new entry") {
+                          // firebaseSubscription(getBaseContext());
                             Log.e("created token ", "in back-end");
                         } else if (response.body().string() == "Successfully updated entry") {
+                            //firebaseSubscription(getBaseContext());
                             Log.e("updated token", "in back-end");
                         } else {
                             Log.e("response code = ", response.code() + " !");
@@ -151,6 +153,8 @@ public class HomeActivity extends AppCompatActivity
          alltopics = new ArrayList<>() ;
          myTopics = new ArrayList<>();
         if (!UtilsSharefPreferences.getSplashScreenState(context)){
+
+
             Call call = RetrofitServiceFactory.getChantierService().getAllTopics();
             call.enqueue(new  retrofit2.Callback<ResponseBody>() {
                 @Override
@@ -171,6 +175,65 @@ public class HomeActivity extends AppCompatActivity
                                 FirebaseMessaging.getInstance().unsubscribeFromTopic(alltopics.get(i).getTopic());
                                 Log.e("unsubscribe "+i , "ok");
                             }
+
+                            JsonObject postParams2 = new JsonObject();
+                            postParams2.addProperty("id_client" , SharedPreferencesFactory.retrieveUserData().getId()+"");
+
+                            Call call2 = RetrofitServiceFactory.getChantierService().getMyTopics(postParams2);
+                            call2.enqueue(new  retrofit2.Callback<ResponseBody>() {
+                                @Override
+                                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                                    if ( response.code() == 200){
+                                        try {
+
+                                            JSONArray jsonObject= null;
+
+                                            Gson gson = Utils.getGsonInstance();
+                                            String remoteResponse= response.body().string();
+                                            Log.e("getMyTopics", remoteResponse);
+                                            jsonObject = new JSONArray(remoteResponse);
+
+                                            for (int i = 0; i < jsonObject.length(); i++)
+                                            {
+                                                JSONObject jsonObj = jsonObject.getJSONObject(i);
+
+                                                Log.e("json object "+i, jsonObj.toString());
+                                            }
+                                            Type type = new TypeToken<ArrayList<Topic>>() {
+                                            }.getType();
+                                            myTopics  = gson.fromJson(jsonObject.toString(), type);
+                                            for (int i = 0 ; i < myTopics.size(); i++) {
+                                                final int finalI = i;
+                                                FirebaseMessaging.getInstance().subscribeToTopic(myTopics.get(i).getTopic())
+                                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                            @Override
+                                                            public void onComplete(@NonNull Task<Void> task) {
+                                                                if ( ! task.isSuccessful()){
+                                                                    Log.e("subscribe to topic" , "subscribe failed"+"");
+                                                                    Log.e("subscribe "+ finalI, "no");
+                                                                } else {
+                                                                    Log.e("subscribe to topic" , "subscribe successed");
+                                                                    Log.e("subscribe "+ finalI, "ok");
+                                                                }
+                                                            }
+                                                        });
+                                            }
+                                        } catch (IOException e) {
+                                            e.printStackTrace();
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                                }
+                            });
+
+
+
                         } catch (IOException e) {
                             e.printStackTrace();
                         } catch (JSONException e) {
@@ -185,62 +248,35 @@ public class HomeActivity extends AppCompatActivity
                 }
             });
 
-        }
-        JsonObject postParams2 = new JsonObject();
-        postParams2.addProperty("id_client" , SharedPreferencesFactory.retrieveUserData().getId()+"");
+/*
 
-        Call call2 = RetrofitServiceFactory.getChantierService().getMyTopics(postParams2);
-        call2.enqueue(new  retrofit2.Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if ( response.code() == 200){
-                    try {
+            JsonObject postParams = new JsonObject();
+            postParams.addProperty("id_client", SharedPreferencesFactory.retrieveUserData().getId());
 
-                        JSONArray jsonObject= null;
+            Call call2 = RetrofitServiceFactory.getChantierService().subscribe(SharedPreferencesFactory.retrieveUserData().getId()+"");
+            call2.enqueue(new retrofit2.Callback() {
+                @Override
+                public void onResponse(Call call, Response response) {
+                    if ( response.code() == 200){
 
-                        Gson gson = Utils.getGsonInstance();
-                        String remoteResponse= response.body().string();
-                        Log.e("getMyTopics", remoteResponse);
-                        jsonObject = new JSONArray(remoteResponse);
+                        Log.e("subscribe from back end" , "ok");
 
-                        for (int i = 0; i < jsonObject.length(); i++)
-                        {
-                            JSONObject jsonObj = jsonObject.getJSONObject(i);
+                    } else {
+                        Log.e("subscribe from back end" , "no");
 
-                            Log.e("json object "+i, jsonObj.toString());
-                        }
-                        Type type = new TypeToken<ArrayList<Topic>>() {
-                        }.getType();
-                        myTopics  = gson.fromJson(jsonObject.toString(), type);
-                        for (int i = 0 ; i < myTopics.size(); i++) {
-                            final int finalI = i;
-                            FirebaseMessaging.getInstance().subscribeToTopic(myTopics.get(i).getTopic())
-                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<Void> task) {
-                                            if ( ! task.isSuccessful()){
-                                                Log.e("subscribe to topic" , "subscribe failed"+"");
-                                                Log.e("subscribe "+ finalI, "no");
-                                            } else {
-                                                Log.e("subscribe to topic" , "subscribe successed");
-                                                Log.e("subscribe "+ finalI, "ok");
-                                            }
-                                        }
-                                    });
-                        }
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    } catch (JSONException e) {
-                        e.printStackTrace();
                     }
+
                 }
-            }
 
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                @Override
+                public void onFailure(Call call, Throwable t) {
 
-            }
-        });
+                }
+            });
+*/
+
+
+        }
 
     }
 
@@ -278,6 +314,7 @@ public class HomeActivity extends AppCompatActivity
                 Utils.isNotificationSaved = false ;
             }
             Log.e("HomeActivity log", "send to next");
+
         }else {
             mainNavBar.getMenu().getItem(0).setChecked(true);
             setFragment(homeFragment);
@@ -292,7 +329,7 @@ public class HomeActivity extends AppCompatActivity
 
                 if (getFromDetailActivity.equals("ok")) {
                     Log.e("from_detail_activity", "ok");
-                    mainNavBar.getMenu().getItem(0).setChecked(true);
+                    mainNavBar.getMenu().getItem(1).setChecked(true);
                     setFragment(activityLogFragment);
 
                 }

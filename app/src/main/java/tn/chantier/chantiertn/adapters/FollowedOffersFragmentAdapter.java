@@ -21,6 +21,7 @@ import android.widget.LinearLayout;
 import java.util.ArrayList;
 
 import tn.chantier.chantiertn.R;
+import tn.chantier.chantiertn.activities.ContactDetailsActivity;
 import tn.chantier.chantiertn.activities.DetailsActivity;
 import tn.chantier.chantiertn.models.FollowedOffer;
 import tn.chantier.chantiertn.utils.Utils;
@@ -144,7 +145,7 @@ public class FollowedOffersFragmentAdapter extends RecyclerView.Adapter<Followed
         holder.goToFollowedOfferDetail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent (context , DetailsActivity.class);
+                Intent intent = new Intent (context , ContactDetailsActivity.class);
                 Bundle extras = new Bundle();
                 extras.putString("id_offer_item" , followedOffer.getId());
                 extras.putString("from_followed_offers_list" , "yes");
