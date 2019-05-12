@@ -138,6 +138,14 @@ public class MyFirebaseMessaging extends FirebaseMessagingService {
                     SharedPreferencesFactory.saveNotifications(getBaseContext(), listNotifications);
                     Utils.isNotification = true ;
 
+                }   else if (remoteMessage.getNotification() != null){
+                    isNotification = true ;
+                    // extract id_lead from title
+                    listNotifications = SharedPreferencesFactory.getListOfNotifications(getBaseContext());
+                     listNotifications.add(0,new Notification(title, content, date, "2", id_lead));
+                    SharedPreferencesFactory.saveNotifications(getBaseContext(), listNotifications);
+                    Utils.isNotification = true ;
+
                 }
 
 

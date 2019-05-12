@@ -114,10 +114,16 @@ public class HomeActivity extends AppCompatActivity
     private void sendFirebaseTokenToBackEnd(){
 
            // firebaseSubscription(getBaseContext());
-        if (refreshedToken != null) {
+
             JsonObject postParams = new JsonObject();
             postParams.addProperty("id_client",professional.getId());
+        if (refreshedToken != null) {
             postParams.addProperty("reg_token", refreshedToken);
+            Log.e("token" ,refreshedToken+"" );
+        } else {
+            postParams.addProperty("reg_token", FirebaseInstanceId.getInstance().getToken()+"");
+            Log.e("token" ,FirebaseInstanceId.getInstance().getToken()+"" );
+        }
             postParams.addProperty("iid" , FirebaseInstanceId.getInstance().getId() );
 
             Call<ResponseBody> call = RetrofitServiceFactory.getChantierService().sendRegToken(postParams);
@@ -144,7 +150,7 @@ public class HomeActivity extends AppCompatActivity
 
                 }
             });
-        }
+
 
     }
 

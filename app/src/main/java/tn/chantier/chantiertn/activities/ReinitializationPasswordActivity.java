@@ -17,6 +17,8 @@ import android.widget.LinearLayout;
 
 import com.google.gson.JsonObject;
 
+import javax.annotation.Nullable;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import okhttp3.ResponseBody;
@@ -42,6 +44,7 @@ public class ReinitializationPasswordActivity extends AppCompatActivity {
     Dialog dialog;
     @BindView(R.id.ic_arrow_back_connexion)
     LinearLayout arrowBackConnexion ;
+    @Nullable
     @BindView(R.id.text_congratulations)
     RalewayTextView textCongratulations ;
     private final static int Reinitialization_TIME_OUT = 4000;

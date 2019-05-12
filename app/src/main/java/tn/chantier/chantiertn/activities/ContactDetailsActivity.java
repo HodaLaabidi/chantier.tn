@@ -185,9 +185,11 @@ public class ContactDetailsActivity extends AppCompatActivity {
                 if (fromNotificationsAdapter != ""){
                     if ( fromNotificationsAdapter.equalsIgnoreCase("yes")  ){
                         Log.e("fromNotificationsAdapter" , fromNotificationsAdapter + "!");
-                        itemDetailLayoutBrowseContact.setVisibility(View.GONE);
-                        contactProgressBar.setVisibility(View.VISIBLE);
-                        setContactLayoutsValues();
+                       itemDetailLayoutBrowseContact.setVisibility(View.VISIBLE);
+                        //contactProgressBar.setVisibility(View.VISIBLE);
+                        itemDetailContact.setVisibility(View.GONE);
+                        contactProgressBar.setVisibility(View.GONE);
+                        //setContactLayoutsValues();
                     }
                 } else {
                     Log.e("notif" , "fromNotificationsAdapter = ''");
@@ -319,36 +321,22 @@ public class ContactDetailsActivity extends AppCompatActivity {
             call.enqueue(new Callback<ResponseBody>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                    Log.e("test33" ,  response.code()+"!!");
                     if ( response.code() == 200){
+                        Log.e("test33..", "logged");
                         try {
                             contactProgressBar.setVisibility(View.GONE);
                             itemDetailContact.setVisibility(View.VISIBLE);
                             Gson gson = Utils.getGsonInstance();
-                            JSONObject jsonObject = new JSONObject(response.body().string());
-                            Log.e("jsonObject" , jsonObject.toString());
+                            String remoteResponse = response.body().string();
+                            Log.e("test33" , remoteResponse + response.code()+"!");
+                            Log.e("test33.", remoteResponse +" !!");
+                            JSONObject jsonObject = new JSONObject(remoteResponse);
+
+                            Log.e("test33" , jsonObject.toString() + response.code()+"!");
+                            Log.e("test33.", remoteResponse +" !!");
                             final Applicant applicant = gson.fromJson(jsonObject.toString(), Applicant.class);
 
-                            /*Log.e(" contacts" , response.body().string());
-                            String responseString = response.body().string();
-                            Log.e(" contacts response code" , response.body()+"");
-                            XmlToJson xmlToJson = new XmlToJson.Builder(responseString).build();
-                            Log.e("json string", xmlToJson.toString());
-                            JSONObject jsonObject = xmlToJson.toJson();
-                            Log.e("xmlToJson", xmlToJson.toString());
-                            Gson gson = Utils.getGsonInstance();
-                            Log.e("jsonObject.toString() ", jsonObject.toString());
-                            final Contacts contacts = gson.fromJson(jsonObject.toString(), Contacts.class);
-                            Log.e("contacts ", contacts.toString());
-                            String test = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n <contacts>\n" +
-                                    "    <nom>ACHOURI Shady</nom>\n" +
-                                    "    <tel>21009858</tel>\n" +
-                                    "    <email>shady.achouri@gmail.com</email>\n" +
-                                    "</contacts>";
-                            Log.e("test =", test);
-                            XmlToJson xmlToJson2 = new XmlToJson.Builder(test).build();
-                            Log.e("xmlToJson2", xmlToJson2.toString());*/
-
-                            //Contacts contacts = response.body();
                             // set layouts
                             itemDetailNameClient.setText(applicant.getNom());
                             itemDetailPhoneNumberClient.setText(applicant.getTel());
@@ -415,6 +403,7 @@ public class ContactDetailsActivity extends AppCompatActivity {
 
 
                     } else if (response.code() == 203) {
+                        Log.e("test33" ,  response.code()+"!");
                         Log.e("response.code = : " ,response.toString() + response.code() + " !");
                         contactProgressBar.setVisibility(View.GONE);
                         itemDetailLayoutBrowseContact.setVisibility(View.VISIBLE);
@@ -422,6 +411,7 @@ public class ContactDetailsActivity extends AppCompatActivity {
                     }else
                      {
                         contactProgressBar.setVisibility(View.GONE);
+                         Log.e("test33" ,  response.code()+"!");
 
                             Log.e("Errorcode: " ,response.toString() + response.code() + " !");
 
