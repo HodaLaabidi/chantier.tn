@@ -613,6 +613,9 @@ public class HomeActivity extends AppCompatActivity
             startActivity(intent);
             finish();
 
+        } else if ( id == R.id.item_contact){
+            Intent intent = new Intent(HomeActivity.this , ContactActivity.class);
+            startActivity(intent);
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

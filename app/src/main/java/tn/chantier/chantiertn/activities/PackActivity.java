@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +13,7 @@ import android.view.DragEvent;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.github.vivchar.viewpagerindicator.ViewPagerIndicator;
 import com.plumillonforge.android.chipview.Chip;
@@ -31,6 +33,8 @@ import tn.chantier.chantiertn.fragments.ProPackFragment;
 import tn.chantier.chantiertn.fragments.ProPackStaticFragment;
 import tn.chantier.chantiertn.models.Tag;
 
+import static tn.chantier.chantiertn.utils.Utils.CONFIDENTIALITY_POLITICS_URL;
+
 
 public class PackActivity extends AppCompatActivity {
 
@@ -44,6 +48,8 @@ public class PackActivity extends AppCompatActivity {
     @BindView(R.id.fragment_pack)
     FrameLayout frameLayout ;
     public static SwitchMultiButton switchMultiButton ;
+    @BindView(R.id.link_confidentiality_politics_from_pack_activity)
+    LinearLayout linkConfidentialityPolitics;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +57,14 @@ public class PackActivity extends AppCompatActivity {
         setContentView(R.layout.activity_pack);
         ButterKnife.bind(this);
         switchMultiButton = findViewById(R.id.switchMBPack);
+        // Confidentiality Politics
+        linkConfidentialityPolitics.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(CONFIDENTIALITY_POLITICS_URL));
+                startActivity(intent);
+            }
+        });
         packViewPager.setAdapter(new PackViewPager(getSupportFragmentManager(), 2));
         /*FragmentManager manager = getFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();

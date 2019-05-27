@@ -48,6 +48,9 @@ public class Utils {
     public static boolean isNotification = false ;
     public static boolean isNotificationSaved = false ;
     public static String resetEmail = "";
+    public static final String CHANTIER_TEL_NUMBER = "71 900 500";
+    public static final String CONFIDENTIALITY_POLITICS_URL = "https://www.chantier.tn/statique/politiquedeconfidentialite";
+
 
     public static final int MY_PERMISSIONS_REQUEST_CALL_PHONE = 130;
     public static final String[] PERMISSIONS = {

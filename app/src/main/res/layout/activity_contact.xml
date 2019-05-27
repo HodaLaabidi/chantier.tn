@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/lightGray"
+    android:layout_height="match_parent"
+    tools:context=".activities.ContactActivity">
+
+    <Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:layout_gravity="center_vertical"
+        android:background="@color/colorBlack"
+        android:gravity="center_vertical">
+
+        <LinearLayout
+            android:id="@+id/iv_arrow_back_contact_activity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp">
+
+            <ImageView
+                android:layout_width="45dp"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:src="@drawable/ic_arrow_back_white" />
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_gravity="left"
+            android:scaleType="centerInside"
+            android:src="@drawable/logo_app" />
+
+
+    </Toolbar>
+
+   <LinearLayout
+       android:layout_below="@+id/toolbar"
+       android:layout_margin="30dp"
+       android:background="@color/colorWhite"
+       android:orientation="vertical"
+       android:gravity="center"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent">
+       <LinearLayout
+           android:orientation="vertical"
+       android:layout_width="match_parent"
+       android:layout_weight="1"
+       android:layout_height="0dp">
+           <com.airbnb.lottie.LottieAnimationView
+               android:foregroundGravity="center"
+               android:id="@+id/animation_view"
+               android:layout_marginRight="15dp"
+               android:layout_marginLeft="15dp"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:layout_gravity="bottom"
+               app:lottie_autoPlay="true"
+               app:lottie_fileName="construction_anim.json"
+               app:lottie_loop="true"/>
+
+       </LinearLayout>
+       <tn.chantier.chantiertn.utils.textstyle.RalewayTextView
+           android:id="@+id/textView"
+           android:gravity="bottom"
+           android:layout_weight="1"
+           android:layout_gravity="center_horizontal"
+           android:layout_width="wrap_content"
+           android:layout_height="0dp"
+           android:text="@string/address_label"
+           android:textColor="@color/colorBlack"
+           android:textSize="20dp"
+           android:textStyle="bold" />
+
+       <tn.chantier.chantiertn.utils.textstyle.RalewayTextView
+           android:gravity="center"
+           android:layout_gravity="center"
+           android:id="@+id/textView2"
+           android:layout_width="wrap_content"
+           android:layout_weight="1"
+           android:layout_height="0dp"
+           android:text="@string/address_chantiertn"
+           android:textColor="@color/colorBlack"
+           android:textSize="15sp"
+           android:textStyle="normal" />
+
+       <tn.chantier.chantiertn.utils.textstyle.RalewayTextView
+           android:id="@+id/textView3"
+           android:gravity="bottom"
+           android:layout_width="wrap_content"
+           android:layout_weight="1"
+           android:layout_height="0dp"
+           android:text="@string/tel_chantiertn_label"
+           android:textColor="@color/colorBlack"
+           android:textSize="20sp"
+           android:textStyle="bold" />
+
+       <tn.chantier.chantiertn.utils.textstyle.RalewayTextView
+           android:gravity="center"
+           android:layout_gravity="center"
+           android:id="@+id/textView4"
+           android:layout_weight="1"
+           android:layout_width="match_parent"
+           android:layout_height="0dp"
+           android:text="@string/tel_chantiertn"
+           android:textColor="@color/colorBlack"
+           android:textSize="14sp" />
+
+       <LinearLayout
+           android:layout_gravity="center"
+           android:orientation="vertical"
+           android:layout_weight="1"
+           android:layout_width="match_parent"
+           android:layout_height="0dp">
+           <LinearLayout
+               android:id="@+id/call_chantiertn"
+               android:layout_width="220dp"
+               android:layout_height="50dp"
+               android:layout_gravity="center"
+               android:layout_marginStart="8dp"
+               android:layout_marginEnd="8dp"
+               android:layout_marginBottom="180dp"
+               android:background="@drawable/background_yellow_button"
+               android:gravity="center"
+               app:layout_constraintBottom_toBottomOf="parent"
+               app:layout_constraintEnd_toEndOf="parent"
+               app:layout_constraintHorizontal_bias="0.494"
+               app:layout_constraintStart_toStartOf="parent">
+
+               <tn.chantier.chantiertn.utils.textstyle.RalewayTextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_gravity="center"
+                   android:text="@string/call_chantiertn"
+                   android:textColor="@color/colorDarkGrey"
+                   android:textSize="18sp"
+                   app:fonttype="bold" />
+
+
+           </LinearLayout>
+       </LinearLayout>
+   </LinearLayout>
+</RelativeLayout>

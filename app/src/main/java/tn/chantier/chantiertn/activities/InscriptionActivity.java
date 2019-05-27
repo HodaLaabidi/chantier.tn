@@ -1,6 +1,7 @@
 package tn.chantier.chantiertn.activities;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -40,6 +41,8 @@ import tn.chantier.chantiertn.utils.Utils;
 import tn.chantier.chantiertn.utils.textstyle.RalewayEditText;
 import tn.chantier.chantiertn.widgets.UI.CustomToast;
 
+import static tn.chantier.chantiertn.utils.Utils.CONFIDENTIALITY_POLITICS_URL;
+
 public class InscriptionActivity extends AppCompatActivity {
 
     public static final String TAG_ACTIVITY = "INSCRIPTION_ACTIVITY";
@@ -66,6 +69,8 @@ public class InscriptionActivity extends AppCompatActivity {
     RalewayEditText etSociatyName ;
     @BindView(R.id.ic_arrow_back_inscription)
     LinearLayout arrowBackInscription;
+    @BindView(R.id.link_confidentiality_politics)
+    LinearLayout linkConfidentialityPolitics;
 
     @Override
     public void onBackPressed() {
@@ -82,6 +87,16 @@ public class InscriptionActivity extends AppCompatActivity {
         // bind layouts with controllers
 
         ButterKnife.bind(this);
+
+        // Confidentiality politics
+
+        linkConfidentialityPolitics.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(CONFIDENTIALITY_POLITICS_URL));
+                startActivity(intent);
+            }
+        });
         arrowBackInscription.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
