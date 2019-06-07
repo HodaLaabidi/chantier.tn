@@ -192,15 +192,17 @@ public class InscriptionActivity extends AppCompatActivity {
                             @Override
                             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                                 String  remoteResponse = null;
-
+                                Log.e("register", response.code()+"!");
                                 try {
                                     remoteResponse = response.body().string();
+                                    Log.e("register", remoteResponse);
                                 if (response.code() == 200) {
 
                                 // done !
-                                        Log.e("register", remoteResponse);
+
+
                                     Gson gson = Utils.getGsonInstance();
-                                    JSONObject object = new JSONObject(response.body().string());
+                                    JSONObject object = new JSONObject(remoteResponse);
                                     String idClient = object.getString("id_client");
                                         Intent intent = new Intent(InscriptionActivity.this, CategoriesActivity.class);
                                         intent.putExtra("id_new_client" , idClient);
@@ -237,8 +239,10 @@ public class InscriptionActivity extends AppCompatActivity {
                                 }
                                 } catch (IOException e) {
                                     e.printStackTrace();
+                                    Log.e("register", "exception");
                                 } catch (JSONException e) {
                                     e.printStackTrace();
+                                    Log.e("register", "exception");
                                 }
                             }
 

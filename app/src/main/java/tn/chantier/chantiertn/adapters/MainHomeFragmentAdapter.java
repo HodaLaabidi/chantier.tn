@@ -79,11 +79,11 @@ public class MainHomeFragmentAdapter extends RecyclerView.Adapter<MainHomeFragme
             }
         } else {
 
-            for (int i = 0; i < listOfOffers.size(); i++) {
+            /*for (int i = 0; i < listOfOffers.size(); i++) {
                 if (i % 5 == 0 && i != 0) {
                     this.listOfOffers.add(i, new Offer());
                 }
-            }
+            }*/
             // static images for ads
             adsDrawable[1] = R.drawable.ads_gif;
             adsDrawable[2] = R.drawable.ads_gif;
@@ -114,16 +114,21 @@ public class MainHomeFragmentAdapter extends RecyclerView.Adapter<MainHomeFragme
 
     @Override
     public int getItemViewType(int position) {
-        if (position % 5 == 0 && position != 0) {
-            isAd = true;
-            return AD_TYPE;
-
-
-        } else {
-            isAd = false;
-
+        if (listOfAds.size() == 0){
+            isAd = false ;
             return CONTENT_TYPE;
+        } else {
+            if (position % 5 == 0 && position != 0) {
+                isAd = true;
+                return AD_TYPE;
 
+
+            } else {
+                isAd = false;
+
+                return CONTENT_TYPE;
+
+            }
         }
     }
 
@@ -204,13 +209,16 @@ public class MainHomeFragmentAdapter extends RecyclerView.Adapter<MainHomeFragme
                 }
             } else {
 
+
                 // -------------------------------Static method-------------------------------------
 
 
             int drawableAds = adsDrawable[countAds];
 
 
-            setStaticAdsValues(drawableAds, holder);
+
+
+            //setStaticAdsValues(drawableAds, holder);
             countAds++;
             if (countAds >= 3) {
                 countAds = 0;
@@ -222,14 +230,17 @@ public class MainHomeFragmentAdapter extends RecyclerView.Adapter<MainHomeFragme
 
     private void setStaticAdsValues(Integer drawableAds, MyViewHolder holder) {
 
-        holder.adsGif.setImageResource(drawableAds);
+
+        holder.itemView.setVisibility(View.GONE);
+
+        /*holder.adsGif.setImageResource(drawableAds);
         holder.adsGif.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context , AdsActivity.class);
                 context.startActivity(intent);
             }
-        });
+        });*/
     }
 
 
